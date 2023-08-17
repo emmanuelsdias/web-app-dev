@@ -1,0 +1,36 @@
+.slideshow-container {
+  position: relative;
+  max-height: 400px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.slideshow-image {
+  object-fit: cover;
+  width: 100%;
+}
+
+.slideshow-image c1 {
+  align-self: end;
+}
+
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}

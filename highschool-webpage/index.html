@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página Inicial</title>
+  <link rel="icon" href="./assets/distintivo-cmpa.svg">
+  <link rel="stylesheet" href="./styles/general.css">
+  <link rel="stylesheet" href="./styles/themes.css">
+  <link rel="stylesheet" href="./styles/slides.css">
+</head>
+
+<body>
+  <header class="index">
+    <div class="header-container">
+      <a href="index.html"><img src="./assets/distintivo-cmpa.svg" alt="Distintitivo CMPA"></a>
+      <div>
+        <p class="slogan">"Bem-Vindo ao Colégio Casarão da Várzea"</p>
+        <h2>Colégio Militar de Porto Alegre</h2>
+        <p class="affiliation">Ministério da Defesa - Exército Brasileiro - DECEx - DEPA</p>
+      </div>
+    </div>
+  </header>
+  <nav class="index">
+    <div class="nav-container">
+      <ul>
+        <li><a href="index.html">Página Inicial</a></li>
+        <li><a href="alunos.html">Alunos</a></li>
+        <li><a href="professores.html">Professores</a></li>
+        <li><a href="administracao.html">Administração</a></li>
+        <li><a href="visitantes.html">Visitantes</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="slideshow-container">
+    <img class="slideshow-image c1" src="./assets/colegio-1.jpg" alt="Colégio Image 1">
+    <img class="slideshow-image c2" src="./assets/colegio-2.jpg" alt="Colégio Image 2">
+    <img class="slideshow-image c3" src="./assets/colegio-3.jpg" alt="Colégio Image 3">
+    <img class="slideshow-image c4" src="./assets/colegio-4.jpg" alt="Colégio Image 4">
+    <img class="slideshow-image c5" src="./assets/colegio-5.jpg" alt="Colégio Image 5">
+
+    <a class="prev" onclick="changeSlide(-1)">❮</a>
+    <a class="next" onclick="changeSlide(1)">❯</a>
+  </div>
+  <main>
+    <div class="main-container">
+      <!-- Seção de Visão Geral -->
+      <section>
+        <h3>Visão Geral</h3>
+        <p>O Colégio Militar de Porto Alegre (CMPA) é uma instituição de ensino com mais de um século de tradição,
+          fundada em 1912. Localizado em um icônico prédio neoclássico que faz parte do patrimônio histórico da cidade,
+          o CMPA se destaca por sua contribuição significativa à educação e à sociedade.</p>
+      </section>
+
+      <!-- Seção Sobre o CMPA -->
+      <section>
+        <h3>Sobre o CMPA</h3>
+        <p>O CMPA é reconhecido por sua excelência educacional, formando alunos não apenas com sólida base acadêmica,
+          mas também valores morais, disciplina e cidadania. Com uma equipe composta por militares e civis, a
+          instituição oferece uma educação integral que prepara os jovens para os desafios do mundo moderno.</p>
+        <p>Além disso, o CMPA é pioneiro em muitas áreas, como possuir um observatório astronômico e incentivar a
+          participação dos alunos em olimpíadas educacionais. Sua história é repleta de conquistas, formando líderes em
+          diversos campos, desde política até cultura.</p>
+        <p>Com uma proposta pedagógica focada no aprendizado interdisciplinar e na interação entre escola, aluno e
+          família, o CMPA é mais do que uma escola: é um patrimônio da educação brasileira, contribuindo para a formação
+          de cidadãos comprometidos e qualificados para o futuro.</p>
+      </section>
+
+      <!-- Seção Missão e Visão -->
+      <section>
+        <h3>Missão e Visão</h3>
+        <p>O CMPA é subordinado a Diretoria de Educação Preparatória e Assistencial (DEPA), sendo esta subordinada ao
+          Departamento de Educação e Cultura do Exército (DECEx). Suas finalidades são:</p>
+        <ul>
+          <li>Atender ao ensino assistencial para os dependentes de militares do Exército e de outras Forças;</il>
+          <li>Ministrar o ensino fundamental e médio a alunos de ambos os sexos;</il>
+          <li>Atender, também, o ensino fundamental e médio para os filhos de civis.</il>
+          <li>Desenvolver nos alunos o sentimento de amor à Pátria e o culto de suas tradições;</il>
+          <li>Assegurar preparo intelectual necessário à continuidade dos estudos em níveis superiores;</il>
+          <li>Aprimorar as qualidades físicas do educando;</il>
+          <li>Desenvolver sadia mentalidade de disciplina consciente;</il>
+          <li>Desenvolver a capacidade de pensar do educando;</il>
+          <li>Despertar vocações para a carreira militar no Exército;</il>
+          <li>Preparar candidatos para o ingresso na Escola Preparatória de Cadetes do Exército (EsPCEx);</il>
+        </ul>
+      </section>
+    </div>
+  </main>
+  <footer class="index">
+    <div class="footer-container">
+      <p>Copyright &copy; 2023 <a href="https://github.com/emmanuelsdias">Emmanuel S Dias</a></p>
+    </div>
+  </footer>
+  <script src="scripts/slides.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+:root {
+  --RED: #E30613;
+  --DARK-RED: #9D111B;
+  --BLUE: #008BD2;
+  --DARK-BLUE: #106189;
+  --GREEN: #009640;
+  --DARK-GREEN: #0F6635;
+  --YELLOW: #FFCC00;
+  --DARK-YELLOW: #CBA50E;
+  --SKY: #A2DAF8;
+  --DARK-SKY: #6BA0BC;
+}
+
+header.index { background-color: var(--SKY); }
+header.alunos { background-color: var(--YELLOW); }
+header.professores { background-color: var(--GREEN); }
+header.administracao { background-color: var(--RED); }
+header.visitantes { background-color: var(--BLUE); }
+
+header.index { color: black; }
+header.alunos { color: black; }
+header.professores { color: white; }
+header.administracao { color: white; }
+header.visitantes { color: white; }
+
+nav.index { background-color: var(--DARK-SKY); }
+nav.alunos { background-color: var(--DARK-YELLOW); }
+nav.professores { background-color: var(--DARK-GREEN); }
+nav.administracao { background-color: var(--DARK-RED); }
+nav.visitantes { background-color: var(--DARK-BLUE); }
+
+footer.index { background-color: var(--DARK-SKY); }
+footer.alunos { background-color: var(--DARK-YELLOW); }
+footer.professores { background-color: var(--DARK-GREEN); }
+footer.administracao { background-color: var(--DARK-RED); }
+footer.visitantes { background-color: var(--DARK-BLUE); }

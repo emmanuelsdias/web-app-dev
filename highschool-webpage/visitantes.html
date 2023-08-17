@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visitantes</title>
+  <link rel="icon" href="./assets/distintivo-cmpa.svg">
+  <link rel="stylesheet" href="./styles/general.css">
+  <link rel="stylesheet" href="./styles/themes.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+</head>
+
+<body>
+  <header class="visitantes">
+    <div class="header-container">
+      <a href="index.html"><img src="./assets/distintivo-cmpa.svg" alt="Distintitivo CMPA"></a>
+      <div>
+        <p class="slogan">"Bem-Vindo ao Colégio Casarão da Várzea"</p>
+        <h2>Colégio Militar de Porto Alegre</h2>
+        <p class="affiliation">Ministério da Defesa - Exército Brasileiro - DECEx - DEPA</p>
+      </div>
+    </div>
+  </header>
+  <nav class="visitantes">
+    <div class="nav-container">
+      <ul>
+        <li><a href="index.html">Página Inicial</a></li>
+        <li><a href="alunos.html">Alunos</a></li>
+        <li><a href="professores.html">Professores</a></li>
+        <li><a href="administracao.html">Administração</a></li>
+        <li><a href="visitantes.html">Visitantes</a></li>
+      </ul>
+    </div>
+  </nav>
+  <main>
+    <div class="main-container">
+      <section>
+        <h2>Visitantes</h2>
+        <p>Bem-vindo à página de visitantes do Colégio Militar de Porto Alegre. Se você está explorando nosso site como
+          convidado, aqui estão algumas informações úteis.</p>
+      </section>
+      <section>
+        <h3>Horários e Condições de Acesso</h3>
+        <p>Todo e qualquer ingresso de visitantes às diversas seções do CMPA, seja a que título for, deve ser realizado
+          somente dentro do horário de expediente do Colégio (07h15 às 12h30; 13h30 às 16h15). Nas sextas-feiras ou em
+          dias de meio expediente, até às 12h30.</p>
+        <p><strong>Não é permitido o ingresso de pessoas sem camisa/blusa ou trajando chinelos, calção, bermuda, short,
+            saia/vestido acima do joelho,</strong> conforme banner existente na entrada do Colégio. Exceção para trajes
+          esportivos ou de trabalho em obras/faxina, quando autorizados, e para trajes infantis.</p>
+        <p>Relembra-se que o Colégio Militar é uma organização militar do Exército Brasileiro e que seu aquartelamento é
+          legalmente considerado como “área militar”. Como tal, todas as pessoas que nela ingressam estão sujeitas aos
+          ditames do Código Penal Militar (CPM) e, se militares, também aos regulamentos e estatuto específicos
+          (Regulamento Interno dos Serviços Gerais - RISG, Regulamento de Continência, Honras e Sinais de Respeito -
+          RCont, Regulamento Disciplinar do Exército - RDE e Estatuto dos Militares - E-1).</p>
+        <p>Por fim, todos os militares da ativa, ao ingressarem no CMPA para tratarem de assuntos de natureza militar,
+          serão identificados pela Comunicação Social, devendo proceder como prescreve o RISG para tal caso,
+          apresentando-se ao Subcomandante. <strong>Nenhum militar da ativa está autorizado a ingressar em trajes civis
+            no CMPA durante o horário do expediente.</strong></p>
+      </section>
+      <section>
+        <h3>Eventos Abertos ao Público</h3>
+        <p>Participe de eventos abertos ao público, como palestras, exposições e atividades culturais que promovemos ao
+          longo do ano.</p>
+      </section>
+      <section>
+        <h3>Onde nos encontrar?</h3>
+        <div id="map" style="height: 400px;"></div>
+      </section>
+    </div>
+  </main>
+  <footer class="visitantes">
+    <div class="footer-container">
+      <p>Copyright &copy; 2023 <a href="https://github.com/emmanuelsdias">Emmanuel S Dias</a></p>
+    </div>
+  </footer>
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <script src="./scripts/map.js"> </script>
+
+</body>
+
+</html>

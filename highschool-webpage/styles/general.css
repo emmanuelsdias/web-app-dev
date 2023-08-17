@@ -1,0 +1,96 @@
+* {
+  /* border: 1px solid black; */
+  font-family: sans-serif;
+}
+
+body {
+  margin: 0 !important;
+  float: none !important;
+  padding: 0 !important;
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header-container,
+.nav-container,
+.main-container,
+.footer-container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.header-container {
+  padding: 20px;
+  display: flex;
+  gap: 20px;
+}
+
+.header-container img {
+  display: block;
+  height: 90px;
+  width: auto;
+}
+
+.header-container div {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.header-container h2,
+.header-container p {
+  margin: 0px;
+}
+
+.slogan {
+  font-size: small;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+nav li {
+  float: left;
+}
+
+nav li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+nav li a:hover {
+  background-color: #00000033;
+}
+
+#map {
+  margin-bottom: 20px;
+}
+
+.main-container p {
+  text-align: justify;
+}
+
+footer {
+  margin-top: auto;
+  color: white;
+  height: 100px;
+  width: 100%;
+  bottom: 0;
+}
+
+footer a,
+footer a:visited {
+  color: inherit;
+}

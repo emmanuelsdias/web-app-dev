@@ -2,12 +2,16 @@
 
 This repository contains a collection of projects developed for the course CES-26: Web Application Development at ITA (Instituto Tecnológico de Aeronáutica, Brazil). Each project is organized within its own folder and showcases the skills and concepts learned throughout the course. The following projects were developed throught the course:
 
-+ Highschool Webpage
++ High School Webpage
 + 
 
-## Highschool Webpage
+## High School Webpage
 
-This project involved building a set of web pages with information about my High School. The pages should be directed towards four different groups: students, professors, administration, and outside visitors, applying a different style to each of their pages. Additionally, the pages should be responsive. The project's website [can be viewed here](https://emmanuelsdias.github.io/web-app-dev/highschool-webpage/index.html).
+This project involved building a set of web pages with information about my High School. The pages should be directed towards four different groups: students, professors, administration, and outside visitors, applying a different style to each of their pages. Additionally, the pages should be responsive. The project's website [can be viewed here](https://emmanuelsdias.github.io/web-app-dev/high-school-webpage/index.html).
+
+### Development process
+
+To develop my High School's webpage, I began by studying my High School's existing website, extracting its logo, colors, and header style, which I then incorporated into the project. Additionally, I sourced images of the school from its official Facebook page. Utilizing the assistance of ChatGPT's AI, I generated dummy content for each of the website's pages. Subsequently, on nearly every page (excluding the administration one), I aimed to introduce distinctive elements beyond mere text. These unique features, such as slideshows and location maps, were initially implemented by the AI. However, in most cases, they required further refinement due to functional issues. To address these challenges, I conducted online research, referring to documentation and seeking out similar problems and their solutions.
 
 ### Lessons learned
 

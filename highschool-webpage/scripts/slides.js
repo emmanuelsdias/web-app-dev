@@ -1,10 +1,6 @@
 let currentSlide = 1;
 showSlide(currentSlide);
 
-function changeSlide(n) {
-  showSlide(currentSlide += n);
-}
-
 function showSlide(n) {
   const slides = document.getElementsByClassName("slideshow-image");
   if (n > slides.length) { currentSlide = 1; }
@@ -14,3 +10,17 @@ function showSlide(n) {
   }
   slides[currentSlide - 1].style.display = "block";
 }
+
+var counter;
+startCounter();
+
+function startCounter() {
+  clearInterval(counter);    
+  counter = setInterval(function(){ changeSlide(+1); }, 5000);
+}
+
+function changeSlide(n) {
+  showSlide(currentSlide += n);
+  startCounter();
+}
+

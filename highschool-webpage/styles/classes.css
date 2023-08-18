@@ -1,0 +1,23 @@
+.turma {
+  box-shadow: 0 0 .5rem .5rem #00000022;
+  border-radius: .5rem;
+  text-align:left;
+  padding: 1rem;
+}
+
+.turma ul {
+  list-style: none;
+}
+
+.turma * {
+  margin: 0;
+  padding: 0;
+}
+
+.turmas {
+  max-width: 1200px;
+  padding-bottom: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+}

@@ -75,16 +75,52 @@ nav li a:hover {
   background-color: #00000033;
 }
 
+input[type=checkbox] {
+  display: none;
+} 
+
+.hamburger {
+  display: none;
+  color: white;
+  text-align: center;
+  padding: 14px;
+  user-select: none;
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
+  .nav-menu {
+    display: none;
+    position: relative;
+  }
+
+  input[type=checkbox]:checked ~ .nav-menu {
+    display: block;
+  }
+
+  nav ul {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
 #map {
   margin-bottom: 20px;
 }
 
-.main-container p {
-  text-align: justify;
-}
-
 .main-container {
   padding: 20px 20px;
+}
+
+.main-container h2 {
+  text-align: center;
+}
+
+.main-container p {
+  text-align: justify;
 }
 
 footer {

@@ -34,3 +34,11 @@ footer.alunos { background-color: var(--DARK-YELLOW); }
 footer.professores { background-color: var(--DARK-GREEN); }
 footer.administracao { background-color: var(--DARK-RED); }
 footer.visitantes { background-color: var(--DARK-BLUE); }
+
+@media (max-width: 768px) { 
+  nav.index .menu { background-color: var(--DARK-SKY); }
+  nav.alunos .menu { background-color: var(--DARK-YELLOW); }
+  nav.professores .menu { background-color: var(--DARK-GREEN); }
+  nav.administracao .menu { background-color: var(--DARK-RED); }
+  nav.visitantes .menu { background-color: var(--DARK-BLUE); }
+}

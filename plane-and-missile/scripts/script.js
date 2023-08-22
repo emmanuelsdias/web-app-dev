@@ -28,15 +28,25 @@ const plane = new Plane(cursorX, cursorY, planeSpeed);
 const missiles = [];
 missiles.push(new Missile(missileX, missileY, missileSpeed));
 
+canvas.addEventListener("touchmove", (e) => {
+  var evt = (typeof e.originalEvent === 'undefined') ? e : e.originalEvent;
+  var touch = evt.touches[0] || evt.changedTouches[0];
+  cursorX = touch.pageX;
+  cursorY = touch.pageY;
+});
+
 canvas.addEventListener("mousemove", (e) => {
   cursorX = e.clientX
   cursorY = e.clientY
 });
 
-canvas.addEventListener("click", () => {
+// canvas.addEventListener("contextmenu", (e) => {
+canvas.addEventListener("click", (e) => {
+  // e.preventDefault();
   missiles[missiles.length - 1].launch(plane.x, plane.y);
   missiles.push(new Missile(missileX, missileY, missileSpeed));
   playMissileLaunchSound();
+  // return false;
 });
 
 function draw() {

@@ -18,10 +18,10 @@ var explosionSound = new Audio('./assets/sounds/launch.wav')
 
 let cursorX = canvas.width / 2;
 let cursorY = canvas.height / 2;
-let planeSpeed = 15;
+let planeSpeed = 10;
 let missileX = canvas.width / 2;
 let missileY = canvas.height - 40;
-let missileSpeed = 10; // Adjust the speed as needed
+let missileSpeed = 5; // Adjust the speed as needed
 let soundEnabled = true;
 
 const plane = new Plane(cursorX, cursorY, planeSpeed);

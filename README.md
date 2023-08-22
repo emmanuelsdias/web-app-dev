@@ -3,7 +3,7 @@
 This repository contains a collection of projects developed for the course CES-26: Web Application Development at ITA (Instituto Tecnológico de Aeronáutica, Brazil). Each project is organized within its own folder and showcases the skills and concepts learned throughout the course. The following projects were developed throught the course:
 
 + High School Webpage
-+ 
++ Plane and Missile
 
 ## High School Webpage
 
@@ -16,3 +16,9 @@ To develop my High School's webpage, I began by studying my High School's existi
 ### Lessons learned
 
 Throughout the project, I learned the foundations of HTML, CSS, and Javascript, as well as how to structure files in an organized manner. Although I attempted to reuse the header, navigation bar, and footer codes by appending them to external `.html` files and then importing them using scripts, I was not satisfied with the end result (blinking of the header etc. due to the loading time of the scripts). In the end, I chose to duplicate the code throughout all the pages, focusing on providing a better user experience. This project was also a great opportunity to learn about efficiently grouping elements together to target them with CSS and to explore basic ways of implementing responsiveness in a website.
+
+## Plane and Missile
+
+This project involved building an interactive animation, featuring a plane that follows the cursor's movement, and a missile that points towards the plane's position. Upon right-clicking, the missile is launched towards the plane and, upon impact, triggers an explosion. The animation includes sound effects, with the ability to toggle sound on or off. This project combines Canvas rendering, user interaction, and audio integration to create an engaging visual and auditory experience.
+
+

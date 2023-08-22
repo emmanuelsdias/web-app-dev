@@ -1,0 +1,3 @@
+Sounds made by smcameron.
+- explosion.wav: https://freesound.org/people/smcameron/sounds/51467/
+- launch.wav:    https://freesound.org/people/smcameron/sounds/51468/

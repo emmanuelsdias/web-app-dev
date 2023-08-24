@@ -1,9 +1,9 @@
 export default class Missile {
-  constructor(x, y, speed) {
+  constructor(x, y, speed, target) {
     this.x = x;
     this.y = y;
     this.speed = speed * (Math.random() + 0.5);
-    this.target = {x: 0, y: 0};
+    this.target = target;
     this.launched = false;
     this.targetHit = false;
     this.missileHit = false;
@@ -13,10 +13,7 @@ export default class Missile {
   }
 
   launch(target) {
-    if (!this.launched) {
-      this.launched = true;
-      this.target = target;
-    }
+    this.launched = true;
   }
 
   checkSurroundings(missiles) {

@@ -9,6 +9,7 @@ const ctx = cnv.getContext("2d");
 cnv.width = innerWidth;
 cnv.height = innerHeight;
 
+ctx.imageSmoothingEnabled = false;
 
 //--- INITIALIZATION ---//
 const mouse = {
@@ -45,7 +46,7 @@ plane = new Plane(mouse.x, mouse.y, planeSpeed);
 plane.chase(mouse);
 particles = [];
 missiles = [];
-missiles.push(new Missile(startMissileX, startMissileY, missileSpeed));
+missiles.push(new Missile(startMissileX, startMissileY, missileSpeed, plane));
 
 
 //--- SOUND FUNCTIONS ---///
@@ -104,7 +105,7 @@ cnv.addEventListener("click", async (e) => {
     missiles[missiles.length - 1].launch(plane);
     playMissileLaunchSound();
     await new Promise(r => setTimeout(r, 200));
-    missiles.push(new Missile(startMissileX, startMissileY, missileSpeed));
+    missiles.push(new Missile(startMissileX, startMissileY, missileSpeed, plane));
     recentLaunch = false;
   }
 });
@@ -113,7 +114,7 @@ cnv.addEventListener("click", async (e) => {
 // cnv.addEventListener("contextmenu", (e) => {
 // e.preventDefault();
 // missiles[missiles.length - 1].launch(plane.x, plane.y);
-// missiles.push(new Missile(startMissileX, startMissileY, missileSpeed));
+// missiles.push(new Missile(startMissileX, startMissileY, missileSpeed, plane));
 // playMissileLaunchSound();
 // return false;
 // });

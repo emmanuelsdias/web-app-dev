@@ -1,3 +1,4 @@
-Sounds made by smcameron.
-- explosion.wav: https://freesound.org/people/smcameron/sounds/51467/
-- launch.wav:    https://freesound.org/people/smcameron/sounds/51468/
+Sounds downloaded from https://freesound.org/:
+- missile_explode.ogg: https://freesound.org/people/SamsterBirdies/sounds/435692/
+- missile_launch.wav:  https://freesound.org/people/Kinoton/sounds/455547/
+- plane_explode.wav:   https://freesound.org/people/EFlexMusic/sounds/393374/

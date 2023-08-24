@@ -31,22 +31,30 @@ const missiles = [];
 missiles.push(new Missile(startMissileX, startMissileY, missileSpeed));
 
 //--- SOUND FUNCTIONS ---///
-let soundEnabled = false;
+let soundEnabled = true;
 
-var launchSound    = new Audio('./assets/sounds/explosion.wav')
-var explosionSound = new Audio('./assets/sounds/launch.wav')
+var missileLaunchSound  = document.getElementById("missileLaunchSound");
+var missileExplodeSound = document.getElementById("missileExplodeSound");
+var planeExplodeSound   = document.getElementById("planeExplodeSound");
 
 function playMissileLaunchSound() {
   if (soundEnabled) {
-    launchSound.currentTime = 0;
-    launchSound.play();
+    missileLaunchSound.currentTime = 0;
+    missileLaunchSound.play();
   }
 }
 
-function playExplosionSound() {
+function playMissileExplodeSound() {
   if (soundEnabled) {
-    explosionSound.currentTime = 0;
-    explosionSound.play();
+    missileExplodeSound.currentTime = 0;
+    missileExplodeSound.play();
+  }
+}
+
+function playPlaneExplodeSound() {
+  if (soundEnabled) {
+    planeExplodeSound.currentTime = 1;
+    planeExplodeSound.play();
   }
 }
 
@@ -127,8 +135,8 @@ function drawLights() {
   ctx.restore();
 
   // Add background
-  ctx.globalCompositeOperation = "multiply";
-  ctx.drawImage(bgImage, 0, 0)
+  // ctx.globalCompositeOperation = "multiply";
+  // ctx.drawImage(bgImage, 0, 0)
 
   // Reset composite operator
   ctx.globalCompositeOperation = "source-over";
@@ -149,12 +157,13 @@ function animate() {
       for (let i = 0; i < 20; i++) {
         particles.push(new Particle(missile.x, missile.y, "white"));
       }  
-      playExplosionSound();
+      playMissileExplodeSound();
       missiles.splice(missiles.indexOf(missile), 1);
     } else if (missile.targetHit) {
       for (let i = 0; i < 20; i++) {
         particles.push(new Particle(plane.x, plane.y, "red"));
       }
+      playPlaneExplodeSound();
       missiles.splice(missiles.indexOf(missile), 1);  
     } else {
       missile.move(plane.x, plane.y, missiles);

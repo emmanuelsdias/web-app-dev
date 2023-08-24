@@ -6,9 +6,20 @@
 html, body {
   width: 100%;
   height: 100%;
-  overscroll-behavior: none;
 }
 
 canvas {
   display: block;
+}
+
+/* MOBILE COMPATIBILITY */
+/* Disable double-tap to zoom */
+* {
+  -ms-touch-action: manipulation; /* IE 10 */
+  touch-action: manipulation;     /* Others */
+}
+
+/* Disable reloading when over-scrolling */
+html, body {  
+  overscroll-behavior: none;
 }

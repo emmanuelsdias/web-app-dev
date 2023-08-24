@@ -32,7 +32,7 @@ export default class Plane {
     }
   }
 
-  draw(ctx, img) {
+  drawObj(ctx, img) {
     const sz = this.size;
     if (this.flipped) {
       ctx.save();
@@ -42,5 +42,15 @@ export default class Plane {
     } else {
      ctx.drawImage(img, this.x - sz / 2, this.y - sz / 2, sz, sz);
     }
+  }
+
+  drawLight(ctx, img) {
+    ctx.drawImage(img, this.x - img.width / 2, this.y - img.height / 2);
+  }
+
+  update(lightCtx, light, objCtx, planeImage) {
+    this.move();
+    this.drawLight(lightCtx, light);
+    this.drawObj(objCtx, planeImage);
   }
 }

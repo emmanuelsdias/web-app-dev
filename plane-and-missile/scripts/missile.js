@@ -69,12 +69,23 @@ export default class Missile {
     }
   }
 
-  draw(ctx, img) {
+  drawLight(ctx, img) {
+    ctx.drawImage(img, this.x - img.width / 2, this.y - img.height / 2);
+  }
+
+  drawObj(ctx, img) {
     const sz = this.size;
     ctx.save();
     ctx.translate(this.x, this.y);
     ctx.rotate(this.angle + Math.PI / 2);
     ctx.drawImage(img, -sz / 2, -sz / 2, sz, sz);
     ctx.restore();
+  }
+  
+  update(missiles, lightCtx, light, objCtx, missileImage) {
+    this.checkSurroundings(missiles);
+    this.move();
+    this.drawLight(lightCtx, light);
+    this.drawObj(objCtx, missileImage);
   }
 }

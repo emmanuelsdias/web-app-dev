@@ -3,6 +3,7 @@ export default class Plane {
     this.x = x;
     this.y = y;
     this.speed = speed;
+    this.size = 40;
   }
 
   moveTo(targetX, targetY) {
@@ -17,5 +18,10 @@ export default class Plane {
       this.x = targetX
       this.y = targetY
     }
+  }
+
+  draw(ctx, img) {
+    const sz = this.size;
+    ctx.drawImage(img, this.x - sz / 2, this.y - sz / 2, sz, sz);
   }
 }

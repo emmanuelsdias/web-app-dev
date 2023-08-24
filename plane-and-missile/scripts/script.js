@@ -1,6 +1,6 @@
 import Plane from './plane.js';
 import Missile from './missile.js';
-
+import Particle from './particle.js';
 
 //--- CANVAS ---//
 const cnv = document.getElementById("canvas");
@@ -25,13 +25,13 @@ let startMissileY = cnv.height - 40;
 let missileSpeed = Math.max(cnv.width, cnv.height) / 200;
 let planeSpeed = 2 * missileSpeed;
 
+const plane = new Plane(cursorX, cursorY, planeSpeed);
+const particles = [];
 const missiles = [];
 missiles.push(new Missile(startMissileX, startMissileY, missileSpeed));
-const plane = new Plane(cursorX, cursorY, planeSpeed);
-
 
 //--- SOUND FUNCTIONS ---///
-let soundEnabled = true;
+let soundEnabled = false;
 
 var launchSound    = new Audio('./assets/sounds/explosion.wav')
 var explosionSound = new Audio('./assets/sounds/launch.wav')
@@ -64,11 +64,17 @@ cnv.addEventListener("mousemove", (e) => {
   cursorY = e.clientY
 });
 
+let recentLaunch = false;
 // Left-click instead of right-click
-cnv.addEventListener("click", (e) => {
-  missiles[missiles.length - 1].launch(plane.x, plane.y);
-  missiles.push(new Missile(startMissileX, startMissileY, missileSpeed));
-  playMissileLaunchSound();
+cnv.addEventListener("click", async (e) => {
+  if (!recentLaunch) {
+    recentLaunch = true;
+    missiles[missiles.length - 1].launch(plane.x, plane.y);
+    playMissileLaunchSound();
+    await new Promise(r => setTimeout(r, 200));
+    missiles.push(new Missile(startMissileX, startMissileY, missileSpeed));
+    recentLaunch = false;
+  }
 });
 
 // // Right-click instead of left-click
@@ -99,6 +105,7 @@ function makeCircleLight(r) {
   return lightCnv;
 }
 
+const tinyLight = makeCircleLight(20);
 const smallLight = makeCircleLight(50);
 const largeLight = makeCircleLight(100);
 
@@ -112,6 +119,12 @@ function drawLights() {
   for (const missile of missiles) {
     ctx.drawImage(smallLight, missile.x - 50, missile.y - 50);
   }
+  ctx.save();
+  for (const particle of particles) {
+    ctx.globalAlpha = particle.lifespan / 60;
+    ctx.drawImage(tinyLight, particle.x - 20, particle.y - 20);
+  }
+  ctx.restore();
 
   // Add background
   ctx.globalCompositeOperation = "multiply";
@@ -132,16 +145,34 @@ function animate() {
   // Move stuff
   plane.moveTo(cursorX, cursorY);
   for (const missile of missiles) {
-    if (missile.exploded) {
+    if (missile.missileHit) {
+      for (let i = 0; i < 20; i++) {
+        particles.push(new Particle(missile.x, missile.y, "white"));
+      }  
       playExplosionSound();
       missiles.splice(missiles.indexOf(missile), 1);
+    } else if (missile.targetHit) {
+      for (let i = 0; i < 20; i++) {
+        particles.push(new Particle(plane.x, plane.y, "red"));
+      }
+      missiles.splice(missiles.indexOf(missile), 1);  
     } else {
       missile.move(plane.x, plane.y, missiles);
     }
   }
+  for (const particle of particles) {
+    particle.move();
+    if (particle.end) {
+      particles.splice(particles.indexOf(particle), 1);
+    }
+  }
+
 
   // Draw stuff
   drawLights();
+  for (const particle of particles) {
+    particle.draw(ctx);
+  }
   for (const missile of missiles) {
     missile.draw(ctx, missileImage);
   }

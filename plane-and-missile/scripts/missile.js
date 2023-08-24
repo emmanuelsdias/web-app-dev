@@ -4,7 +4,8 @@ export default class Missile {
     this.y = y;
     this.speed = (Math.random() + 0.5) * speed;
     this.launched = false;
-    this.exploded = false;
+    this.targetHit = false;
+    this.missileHit = false;
     this.angle = 0;
     this.size = 40;
   }
@@ -18,7 +19,7 @@ export default class Missile {
   }
 
   avoidCollisions(missiles) {
-    const separation = this.size/2; 
+    const separation = this.size / 2; 
 
     let repulsion = { x: 0, y: 0 };
     let total = 0;
@@ -33,6 +34,10 @@ export default class Missile {
           repulsion.x += dx;
           repulsion.y += dy;
           total++;
+          if (distance < this.size / 4) {
+            this.missileHit = true;
+            other.missileHit = true;
+          }
         }
       }
     }
@@ -61,7 +66,7 @@ export default class Missile {
         this.x += (dx / distance) * this.speed;
         this.y += (dy / distance) * this.speed;
       } else {
-        this.exploded = true;
+        this.targetHit = true;
       }
     }
   }

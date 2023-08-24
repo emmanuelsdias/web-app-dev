@@ -2,23 +2,24 @@ export default class Missile {
   constructor(x, y, speed) {
     this.x = x;
     this.y = y;
-    this.speed = (Math.random() + 0.5) * speed;
+    this.speed = speed * (Math.random() + 0.5);
+    this.target = {x: 0, y: 0};
     this.launched = false;
     this.targetHit = false;
     this.missileHit = false;
     this.angle = 0;
     this.size = 40;
+    this.repulsion = 0;
   }
 
-  launch(targetX, targetY) {
+  launch(target) {
     if (!this.launched) {
       this.launched = true;
-      this.targetX = targetX;
-      this.targetY = targetY;
+      this.target = target;
     }
   }
 
-  avoidCollisions(missiles) {
+  checkSurroundings(missiles) {
     const separation = this.size / 2; 
 
     let repulsion = { x: 0, y: 0 };
@@ -50,13 +51,13 @@ export default class Missile {
       }
     }
 
-    return repulsion;
+    this.repulsion = repulsion;
   }
 
-  move(targetX, targetY, missiles) {
-    const separation = this.avoidCollisions(missiles);
-    const dx = targetX - this.x + separation.x;
-    const dy = targetY - this.y + separation.y;
+  move() {
+    const separation = this.repulsion;
+    const dx = this.target.x - this.x + separation.x;
+    const dy = this.target.y - this.y + separation.y;
     this.angle = Math.atan2(dy, dx);
 
     if (this.launched) {

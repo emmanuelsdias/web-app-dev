@@ -1,34 +1,52 @@
 import Plane from './plane.js';
 import Missile from './missile.js';
 import Particle from './particle.js';
+import { drawLights } from './lights.js';
 
 //--- CANVAS ---//
 const cnv = document.getElementById("canvas");
-cnv.width = document.body.clientWidth;
-cnv.height = document.body.clientHeight;
 const ctx = cnv.getContext("2d");
-
-let cursorX = cnv.width / 2;
-let cursorY = cnv.height / 2;
+cnv.width = innerWidth;
+cnv.height = innerHeight;
 
 
 //--- INITIALIZATION ---//
+const mouse = {
+  x: innerWidth / 2,
+  y: innerHeight / 2
+};
+
 const planeImage   = new Image();
 const missileImage = new Image();
 const bgImage      = new Image();
 planeImage.src   = "./assets/images/plane.png";
 missileImage.src = "./assets/images/missile.png";
-bgImage.src      = "./assets/images/dummy_bg.png"
+bgImage.src      = "./assets/images/dummy_bg.png";
 
-let startMissileX = cnv.width / 2;
-let startMissileY = cnv.height - 40;
-let missileSpeed = Math.max(cnv.width, cnv.height) / 200;
-let planeSpeed = 2 * missileSpeed;
+let startMissileX;
+let startMissileY;
+let missileSpeed;
+let planeSpeed;
 
-const plane = new Plane(cursorX, cursorY, planeSpeed);
-const particles = [];
-const missiles = [];
+function reset () {
+  startMissileX = cnv.width / 2;
+  startMissileY = cnv.height - 40;
+  missileSpeed = Math.max(cnv.width, cnv.height) / 200;
+  planeSpeed = 2 * missileSpeed;
+}
+
+reset();
+
+let plane;
+let particles;
+let missiles;
+
+plane = new Plane(mouse.x, mouse.y, planeSpeed);
+plane.chase(mouse);
+particles = [];
+missiles = [];
 missiles.push(new Missile(startMissileX, startMissileY, missileSpeed));
+
 
 //--- SOUND FUNCTIONS ---///
 let soundEnabled = true;
@@ -60,16 +78,22 @@ function playPlaneExplodeSound() {
 
 
 //--- LISTENERS ---///
+addEventListener('resize', () => {
+  cnv.width = document.body.clientWidth;
+  cnv.height = document.body.clientHeight;
+  reset();
+});
+
 cnv.addEventListener("touchmove", (e) => {
   var evt = (typeof e.originalEvent === 'undefined') ? e : e.originalEvent;
   var touch = evt.touches[0] || evt.changedTouches[0];
-  cursorX = touch.pageX;
-  cursorY = touch.pageY;
+  mouse.x = touch.pageX;
+  mouse.y = touch.pageY;
 });
 
 cnv.addEventListener("mousemove", (e) => {
-  cursorX = e.clientX
-  cursorY = e.clientY
+  mouse.x = e.clientX
+  mouse.y = e.clientY
 });
 
 let recentLaunch = false;
@@ -77,7 +101,7 @@ let recentLaunch = false;
 cnv.addEventListener("click", async (e) => {
   if (!recentLaunch) {
     recentLaunch = true;
-    missiles[missiles.length - 1].launch(plane.x, plane.y);
+    missiles[missiles.length - 1].launch(plane);
     playMissileLaunchSound();
     await new Promise(r => setTimeout(r, 200));
     missiles.push(new Missile(startMissileX, startMissileY, missileSpeed));
@@ -95,97 +119,50 @@ cnv.addEventListener("click", async (e) => {
 // });
 
 
-//--- LIGHTS ---///
-function makeCircleLight(r) {
-  const lightCnv = document.createElement("canvas");
-  lightCnv.width = 2 * r;
-  lightCnv.height = 2 * r;
-  const lightCtx = lightCnv.getContext("2d");
-
-  const grd = lightCtx.createRadialGradient(r, r, 0, r, r, r);
-  grd.addColorStop(0.2, "rgba(255, 255, 255, 1.0)");
-  grd.addColorStop(0.7, "rgba(255, 255, 255, 0.3)");
-  grd.addColorStop(1.0, "rgba(255, 255, 255, 0.0)");
-
-  lightCtx.fillStyle = grd;
-  lightCtx.fillRect(0, 0, 2 * r, 2 * r);
-
-  return lightCnv;
-}
-
-const tinyLight = makeCircleLight(20);
-const smallLight = makeCircleLight(50);
-const largeLight = makeCircleLight(100);
-
-function drawLights() {
-  // Cover with shadow
-  ctx.fillStyle = "black";
-  ctx.fillRect(0, 0, canvas.width, canvas.height)
-
-  // Add lights
-  ctx.drawImage(largeLight, plane.x - 100, plane.y - 100);
-  for (const missile of missiles) {
-    ctx.drawImage(smallLight, missile.x - 50, missile.y - 50);
-  }
-  ctx.save();
-  for (const particle of particles) {
-    ctx.globalAlpha = particle.lifespan / 60;
-    ctx.drawImage(tinyLight, particle.x - 20, particle.y - 20);
-  }
-  ctx.restore();
-
-  // Add background
-  // ctx.globalCompositeOperation = "multiply";
-  // ctx.drawImage(bgImage, 0, 0)
-
-  // Reset composite operator
-  ctx.globalCompositeOperation = "source-over";
-}
-
-
 //--- MAIN LOOP ---///
+function explode(target, color) {
+  for (let i = 0; i < 20; i++) {
+    particles.push(new Particle(target.x, target.y, color));
+  }
+}
+
+function drawBackground(ctx, img) {
+  ctx.globalCompositeOperation = "multiply";
+  ctx.drawImage(img, 0, 0)
+  ctx.globalCompositeOperation = "source-over";
+};
+
 function animate() {
   // Reset canvas
-  canvas.width = document.body.clientWidth;
-  canvas.height = document.body.clientHeight;
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.clearRect(0, 0, cnv.width, cnv.height);
 
-  // Move stuff
-  plane.moveTo(cursorX, cursorY);
+  // Update positions and statuses
+  plane.move();
   for (const missile of missiles) {
+    missile.checkSurroundings(missiles);
+    missile.move();
     if (missile.missileHit) {
-      for (let i = 0; i < 20; i++) {
-        particles.push(new Particle(missile.x, missile.y, "white"));
-      }  
       playMissileExplodeSound();
-      missiles.splice(missiles.indexOf(missile), 1);
+      explode(missile, "white");
     } else if (missile.targetHit) {
-      for (let i = 0; i < 20; i++) {
-        particles.push(new Particle(plane.x, plane.y, "red"));
-      }
       playPlaneExplodeSound();
-      missiles.splice(missiles.indexOf(missile), 1);  
-    } else {
-      missile.move(plane.x, plane.y, missiles);
-    }
+      explode(plane, "red");
+    } 
   }
   for (const particle of particles) {
     particle.move();
-    if (particle.end) {
-      particles.splice(particles.indexOf(particle), 1);
-    }
   }
 
-
-  // Draw stuff
-  drawLights();
-  for (const particle of particles) {
-    particle.draw(ctx);
-  }
-  for (const missile of missiles) {
-    missile.draw(ctx, missileImage);
-  }
+  // Draw on canvas
+  drawLights(ctx, plane, missiles, particles);
+  drawBackground(ctx, bgImage);
+  for (const p of particles) { p.draw(ctx, missileImage); };
+  for (const m of missiles) { m.draw(ctx, missileImage); }
   plane.draw(ctx, planeImage);
+
+  // Remove old missiles and particles
+  missiles = missiles.filter(missile => !missile.missileHit && !missile.targetHit);
+  particles = particles.filter(particle => !particle.end);
 
   // Loop animation
   requestAnimationFrame(animate);

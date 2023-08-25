@@ -3,11 +3,9 @@ import Missile from './missile.js';
 import Particle from './particle.js';
 import { makeCircleLight } from './lights.js';
 
-//--- CANVAS ---//
+//--- CANVASES ---//
 const cnv = document.getElementById("canvas");
 const ctx = cnv.getContext("2d");
-cnv.width = innerWidth;
-cnv.height = innerHeight;
 
 const lightCnv = document.createElement("canvas");
 const lightCtx = lightCnv.getContext("2d");
@@ -17,7 +15,19 @@ const objCtx = objCnv.getContext("2d");
 
 ctx.imageSmoothingEnabled = false;
 
-function composeCanvas() {
+function resizeCanvases() {
+  cnv.width = innerWidth;
+  cnv.height = innerHeight;
+  
+  lightCnv.width = cnv.width;
+  lightCnv.height = cnv.height;
+
+  objCnv.width = cnv.width;
+  objCnv.height = cnv.height;
+  objCtx.imageSmoothingEnabled = false;
+}
+
+function overlayCanvases() {
   ctx.drawImage(lightCnv, 0, 0);
   ctx.globalCompositeOperation = "multiply";
   ctx.drawImage(bgImage, 0, 0)
@@ -25,7 +35,7 @@ function composeCanvas() {
   ctx.drawImage(objCnv, 0, 0);
 }
 
-function resetCanvas() {
+function clearCanvases() {
   ctx.clearRect(0, 0, cnv.width, cnv.height);
   lightCtx.clearRect(0, 0, cnv.width, cnv.height);
   lightCtx.fillStyle = "rgb(100, 100, 100)";
@@ -33,13 +43,10 @@ function resetCanvas() {
   objCtx.clearRect(0, 0, cnv.width, cnv.height);
 }
 
+resizeCanvases();
 
-//--- INITIALIZATION ---//
-const mouse = {
-  x: innerWidth / 2,
-  y: innerHeight / 2
-};
 
+//--- ASSETS ---//
 const planeImage   = new Image();
 const missileImage = new Image();
 const bgImage      = new Image();
@@ -50,40 +57,6 @@ missileImage.src = "./assets/images/missile.png";
 bgImage.src      = "./assets/images/dummy_bg.png";
 muteImage.src    = "./assets/images/mute.png";
 unmuteImage.src  = "./assets/images/unmute.png";
-
-let startMissileX;
-let startMissileY;
-let missileSpeed;
-let planeSpeed;
-
-function reset () {
-  cnv.width = document.body.clientWidth;
-  cnv.height = document.body.clientHeight;
-  
-  lightCnv.width = cnv.width;
-  lightCnv.height = cnv.height;
-
-  objCnv.width = cnv.width;
-  objCnv.height = cnv.height;
-  objCtx.imageSmoothingEnabled = false;
-
-  startMissileX = cnv.width / 2;
-  startMissileY = cnv.height - 40;
-  missileSpeed = Math.max(cnv.width, cnv.height) / 200;
-  planeSpeed = 2 * missileSpeed;
-}
-
-reset();
-
-let plane;
-let particles;
-let missiles;
-
-plane = new Plane(mouse.x, mouse.y, planeSpeed);
-plane.chase(mouse);
-particles = [];
-missiles = [];
-missiles.push(new Missile(startMissileX, startMissileY, missileSpeed, plane));
 
 
 //--- SOUND FUNCTIONS ---///
@@ -116,8 +89,14 @@ function playPlaneExplodeSound() {
 
 
 //--- LISTENERS ---///
+const mouse = {
+  x: innerWidth / 2,
+  y: innerHeight / 2
+};
+
 addEventListener('resize', () => {
-  reset();
+  resizeCanvases();
+  resetParameters();
 });
 
 cnv.addEventListener("touchmove", (e) => {
@@ -132,7 +111,7 @@ cnv.addEventListener("mousemove", (e) => {
   mouse.y = e.clientY
 });
 
-let recentLaunch = false;
+let recentLaunch;
 // Left-click instead of right-click
 cnv.addEventListener("click", async (e) => {
   if (mouse.x >= 10 && mouse.x <= 70 && mouse.y >= 10 && mouse.y <= 70) {
@@ -164,16 +143,60 @@ const smallLight = makeCircleLight(50);
 const largeLight = makeCircleLight(100);
 
 
-//--- MAIN LOOP ---///
+//--- GAME PARAMETERS ---//
+let startMissileX;
+let startMissileY;
+let missileSpeed;
+let planeSpeed;
+
+function resetParameters() {
+  startMissileX = cnv.width / 2;
+  startMissileY = cnv.height - 40;
+  missileSpeed = Math.max(cnv.width, cnv.height) / 200;
+  planeSpeed = 2 * missileSpeed;
+}
+
+resetParameters();
+
+
+//--- GAME OBJECTS AND FUNCTIONS ---//
+let plane;
+let particles;
+let missiles;
+let score;
+
+function newGame() {
+  score = 0;
+  plane = new Plane(mouse.x, mouse.y, planeSpeed);
+  plane.chase(mouse);
+  particles = [];
+  missiles = [];
+  missiles.push(new Missile(startMissileX, startMissileY, missileSpeed, plane));
+}
+
 function explode(target, color) {
   for (let i = 0; i < 20; i++) {
     particles.push(new Particle(target.x, target.y, color));
   }
 }
 
+function updateScore() {
+  for (const missile of missiles) {
+    if (missile.missileHit) {
+      score += 1;
+    }
+  }
+  ctx.font = "24px Arial";
+  ctx.fillStyle = "white";
+  ctx.textAlign = "center";
+  ctx.fillText(`Score: ${score}`, cnv.width / 2, 40);
+}
+
+
+//--- MAIN LOOP ---///
 function animate() {
-  // Reset canvas
-  resetCanvas();
+  // Clear canvas
+  clearCanvases();
   
   // Update objects
   for (const particle of particles) {
@@ -191,12 +214,12 @@ function animate() {
   }
   plane.update(lightCtx, largeLight, objCtx, planeImage);
 
-  
-  // Compose canvas
-  composeCanvas();
+  // Overlay canvases
+  overlayCanvases();
 
   // Update UI
   ctx.drawImage(soundEnabled ? unmuteImage : muteImage, 10, 10, 60, 60);
+  updateScore();
   
   // Remove old missiles and particles
   missiles = missiles.filter(missile => !missile.missileHit && !missile.targetHit);
@@ -205,6 +228,8 @@ function animate() {
   // Loop animation
   requestAnimationFrame(animate);
 }
+
+newGame();
 
 // Wait for images to load before starting animation
 Promise.all([

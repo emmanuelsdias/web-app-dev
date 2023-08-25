@@ -43,9 +43,13 @@ const mouse = {
 const planeImage   = new Image();
 const missileImage = new Image();
 const bgImage      = new Image();
+const muteImage    = new Image();
+const unmuteImage  = new Image();
 planeImage.src   = "./assets/images/plane.png";
 missileImage.src = "./assets/images/missile.png";
 bgImage.src      = "./assets/images/dummy_bg.png";
+muteImage.src    = "./assets/images/mute.png";
+unmuteImage.src  = "./assets/images/unmute.png";
 
 let startMissileX;
 let startMissileY;
@@ -131,7 +135,10 @@ cnv.addEventListener("mousemove", (e) => {
 let recentLaunch = false;
 // Left-click instead of right-click
 cnv.addEventListener("click", async (e) => {
-  if (!recentLaunch) {
+  if (mouse.x >= 10 && mouse.x <= 70 && mouse.y >= 10 && mouse.y <= 70) {
+    soundEnabled = !soundEnabled;
+
+  } else if (!recentLaunch) {
     recentLaunch = true;
     missiles[missiles.length - 1].launch(plane);
     playMissileLaunchSound();
@@ -184,9 +191,13 @@ function animate() {
   }
   plane.update(lightCtx, largeLight, objCtx, planeImage);
 
+  
   // Compose canvas
   composeCanvas();
 
+  // Update UI
+  ctx.drawImage(soundEnabled ? unmuteImage : muteImage, 10, 10, 60, 60);
+  
   // Remove old missiles and particles
   missiles = missiles.filter(missile => !missile.missileHit && !missile.targetHit);
   particles = particles.filter(particle => !particle.end);

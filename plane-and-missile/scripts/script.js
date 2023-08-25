@@ -58,13 +58,16 @@ bgImage.src      = "./assets/images/dummy_bg.png";
 muteImage.src    = "./assets/images/mute.png";
 unmuteImage.src  = "./assets/images/unmute.png";
 
+ctx.font = "24px PixelFont, sans-serif";
+ctx.fillStyle = "white";
+ctx.textAlign = "center";
 
 //--- SOUND FUNCTIONS ---///
 let soundEnabled = true;
 
-var missileLaunchSound  = document.getElementById("missileLaunchSound");
-var missileExplodeSound = document.getElementById("missileExplodeSound");
-var planeExplodeSound   = document.getElementById("planeExplodeSound");
+const missileLaunchSound  = document.getElementById("missileLaunchSound");
+const missileExplodeSound = document.getElementById("missileExplodeSound");
+const planeExplodeSound   = document.getElementById("planeExplodeSound");
 
 function playMissileLaunchSound() {
   if (soundEnabled) {
@@ -100,8 +103,8 @@ addEventListener('resize', () => {
 });
 
 cnv.addEventListener("touchmove", (e) => {
-  var evt = (typeof e.originalEvent === 'undefined') ? e : e.originalEvent;
-  var touch = evt.touches[0] || evt.changedTouches[0];
+  let evt = (typeof e.originalEvent === 'undefined') ? e : e.originalEvent;
+  let touch = evt.touches[0] || evt.changedTouches[0];
   mouse.x = touch.pageX;
   mouse.y = touch.pageY;
 });
@@ -186,10 +189,7 @@ function updateScore() {
       score += 1;
     }
   }
-  ctx.font = "24px Arial";
-  ctx.fillStyle = "white";
-  ctx.textAlign = "center";
-  ctx.fillText(`Score: ${score}`, cnv.width / 2, 40);
+  ctx.fillText(`SCORE: ${score}`, cnv.width / 2, 40);
 }
 
 

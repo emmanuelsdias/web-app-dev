@@ -1,3 +1,6 @@
+Font downloaded from https://www.dafont.com/:
+- 04b_19.tff: https://www.dafont.com/04b-19.font
+
 Sounds downloaded from https://freesound.org/:
 - missile_explode.ogg: https://freesound.org/people/SamsterBirdies/sounds/435692/
 - missile_launch.wav:  https://freesound.org/people/Kinoton/sounds/455547/

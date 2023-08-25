@@ -12,6 +12,11 @@ canvas {
   display: block;
 }
 
+@font-face {
+  font-family: 'PixelFont';
+  src: url('../assets/fonts/04b_19.ttf') format('truetype'); 
+}
+
 /* MOBILE COMPATIBILITY */
 /* Disable double-tap to zoom */
 * {

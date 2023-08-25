@@ -61,6 +61,7 @@ function reset () {
 
   objCnv.width = cnv.width;
   objCnv.height = cnv.height;
+  objCtx.imageSmoothingEnabled = false;
 
   startMissileX = cnv.width / 2;
   startMissileY = cnv.height - 40;

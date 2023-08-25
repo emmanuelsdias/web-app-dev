@@ -3,12 +3,26 @@ import Missile from './missile.js';
 import Particle from './particle.js';
 import { makeCircleLight } from './lights.js';
 
+//--- COLORS ---//
+var COLORS = {
+  RED:    "#EB501D",
+  BLUE:   "#1178BD",
+  YELLOW: "#FEC570",
+  WHITE:  "#F0F0F0",
+  GRAY:   "#BDC9D7",
+  BLACK:  "#3B3B3B"
+};
+
+
 //--- CANVASES ---//
 const cnv = document.getElementById("canvas");
 const ctx = cnv.getContext("2d");
 
 const lightCnv = document.createElement("canvas");
 const lightCtx = lightCnv.getContext("2d");
+
+const bgCnv = document.createElement("canvas");
+const bgCtx = bgCnv.getContext("2d");
 
 const objCnv = document.createElement("canvas");
 const objCtx = objCnv.getContext("2d");
@@ -18,9 +32,13 @@ ctx.imageSmoothingEnabled = false;
 function resizeCanvases() {
   cnv.width = innerWidth;
   cnv.height = innerHeight;
+  ctx.imageSmoothingEnabled = false;
   
   lightCnv.width = cnv.width;
   lightCnv.height = cnv.height;
+
+  bgCnv.width = cnv.width;
+  bgCnv.height = cnv.height;
 
   objCnv.width = cnv.width;
   objCnv.height = cnv.height;
@@ -30,7 +48,7 @@ function resizeCanvases() {
 function overlayCanvases() {
   ctx.drawImage(lightCnv, 0, 0);
   ctx.globalCompositeOperation = "multiply";
-  ctx.drawImage(bgImage, 0, 0)
+  ctx.drawImage(bgCnv, 0, 0);
   ctx.globalCompositeOperation = "source-over";
   ctx.drawImage(objCnv, 0, 0);
 }
@@ -38,12 +56,28 @@ function overlayCanvases() {
 function clearCanvases() {
   ctx.clearRect(0, 0, cnv.width, cnv.height);
   lightCtx.clearRect(0, 0, cnv.width, cnv.height);
-  lightCtx.fillStyle = "rgb(100, 100, 100)";
+  lightCtx.fillStyle = COLORS.BLACK;
   lightCtx.fillRect(0, 0, cnv.width, cnv.height)
   objCtx.clearRect(0, 0, cnv.width, cnv.height);
 }
 
 resizeCanvases();
+
+
+//--- SCALING BASED ON VIBES ---//
+let scaling;
+
+function updateIdealScaling() {
+  let vibes = Math.max(cnv.width, cnv.height) / 200 ;
+  if (vibes > 6) {
+    scaling = 3;
+  } else if (vibes > 3) {
+    scaling = 2;
+  } else {
+    scaling = 1;
+  }
+}
+updateIdealScaling();
 
 
 //--- ASSETS ---//
@@ -54,13 +88,33 @@ const muteImage    = new Image();
 const unmuteImage  = new Image();
 planeImage.src   = "./assets/images/plane.png";
 missileImage.src = "./assets/images/missile.png";
-bgImage.src      = "./assets/images/dummy_bg.png";
+bgImage.src      = "./assets/images/background.png";
 muteImage.src    = "./assets/images/mute.png";
 unmuteImage.src  = "./assets/images/unmute.png";
 
-ctx.font = "24px PixelFont, sans-serif";
-ctx.fillStyle = "white";
-ctx.textAlign = "center";
+function updateTextStyle() {
+  ctx.font = `${20 * scaling}px PixelFont, sans-serif`;
+  ctx.fillStyle = COLORS.WHITE;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "top";
+}
+updateTextStyle();
+
+function drawImageScaled() {
+  const canvas = bgCtx.canvas ;
+  const hRatio = canvas.width  / bgImage.width    ;
+  const vRatio =  canvas.height / bgImage.height  ;
+  const ratio  = Math.max(hRatio, vRatio);
+  const centerShiftX = (canvas.width - bgImage.width*ratio) / 2;
+  const centerShiftY = (canvas.height - bgImage.height*ratio) / 2;  
+  bgCtx.drawImage(bgImage, 
+                  0,                   0, 
+                  bgImage.width,       bgImage.height,
+                  centerShiftX,        centerShiftY,
+                  bgImage.width*ratio, bgImage.height*ratio
+  );  
+}
+
 
 //--- SOUND FUNCTIONS ---///
 let soundEnabled = true;
@@ -99,6 +153,9 @@ const mouse = {
 
 addEventListener('resize', () => {
   resizeCanvases();
+  drawImageScaled();
+  updateIdealScaling();
+  updateTextStyle();
   resetParameters();
 });
 
@@ -117,49 +174,25 @@ cnv.addEventListener("mousemove", (e) => {
 let recentLaunch;
 // Left-click instead of right-click
 cnv.addEventListener("click", async (e) => {
-  if (mouse.x >= 10 && mouse.x <= 70 && mouse.y >= 10 && mouse.y <= 70) {
+  if (mouse.x >= 20 && mouse.x <= 20 * (1 + scaling) && mouse.y >= 20 && mouse.y <= 20 * (1 + scaling)) {
     soundEnabled = !soundEnabled;
-
   } else if (!recentLaunch) {
     recentLaunch = true;
-    missiles[missiles.length - 1].launch(plane);
+    if (missiles.length > 0) {
+      missiles[missiles.length - 1].launch(plane);
+    }
     playMissileLaunchSound();
     await new Promise(r => setTimeout(r, 200));
-    missiles.push(new Missile(startMissileX, startMissileY, missileSpeed, plane));
+    missiles.push(new Missile(startMissileX, startMissileY, missileSpeed, plane, scaling));
     recentLaunch = false;
   }
 });
-
-// // Right-click instead of left-click
-// cnv.addEventListener("contextmenu", (e) => {
-// e.preventDefault();
-// missiles[missiles.length - 1].launch(plane.x, plane.y);
-// missiles.push(new Missile(startMissileX, startMissileY, missileSpeed, plane));
-// playMissileLaunchSound();
-// return false;
-// });
 
 
 //--- LIGHTS ---///
 const tinyLight = makeCircleLight(20);
 const smallLight = makeCircleLight(50);
 const largeLight = makeCircleLight(100);
-
-
-//--- GAME PARAMETERS ---//
-let startMissileX;
-let startMissileY;
-let missileSpeed;
-let planeSpeed;
-
-function resetParameters() {
-  startMissileX = cnv.width / 2;
-  startMissileY = cnv.height - 40;
-  missileSpeed = Math.max(cnv.width, cnv.height) / 200;
-  planeSpeed = 2 * missileSpeed;
-}
-
-resetParameters();
 
 
 //--- GAME OBJECTS AND FUNCTIONS ---//
@@ -170,11 +203,11 @@ let score;
 
 function newGame() {
   score = 0;
-  plane = new Plane(mouse.x, mouse.y, planeSpeed);
+  plane = new Plane(mouse.x, mouse.y, planeSpeed, scaling);
   plane.chase(mouse);
   particles = [];
   missiles = [];
-  missiles.push(new Missile(startMissileX, startMissileY, missileSpeed, plane));
+  missiles.push(new Missile(startMissileX, startMissileY, missileSpeed, plane, scaling));
 }
 
 function explode(target, color) {
@@ -183,14 +216,39 @@ function explode(target, color) {
   }
 }
 
+function updateMuteButton() {
+  const displayedImage = soundEnabled ? unmuteImage : muteImage;
+  ctx.drawImage(displayedImage, 20, 20, 20 * scaling, 20 * scaling);
+}
+
 function updateScore() {
   for (const missile of missiles) {
     if (missile.missileHit) {
       score += 1;
     }
   }
-  ctx.fillText(`SCORE: ${score}`, cnv.width / 2, 40);
+  ctx.fillText(`SCORE: ${score}`, cnv.width / 2, 20);
 }
+
+
+//--- GAME PARAMETERS ---//
+let startMissileX;
+let startMissileY;
+let missileSpeed;
+let planeSpeed;
+
+function resetParameters() {
+  startMissileX = cnv.width / 2;
+  startMissileY = cnv.height - 20 * scaling;
+  missileSpeed = Math.max(cnv.width, cnv.height) / 200;
+  planeSpeed = 2 * missileSpeed;
+  if (typeof plane !== "undefined" && plane !== null) {
+    plane.updateSpeed(planeSpeed);
+}
+
+}
+
+resetParameters();
 
 
 //--- MAIN LOOP ---///
@@ -206,10 +264,13 @@ function animate() {
     missile.update(missiles, lightCtx, smallLight, objCtx, missileImage);
     if (missile.missileHit) {
       playMissileExplodeSound();
-      explode(missile, "white");
+      explode(missile, COLORS.WHITE);
     } else if (missile.targetHit) {
       playPlaneExplodeSound();
-      explode(plane, "red");
+      explode(plane, COLORS.WHITE);
+      explode(plane, COLORS.YELLOW);
+      explode(plane, COLORS.BLUE);
+      explode(plane, COLORS.RED);
     } 
   }
   plane.update(lightCtx, largeLight, objCtx, planeImage);
@@ -218,7 +279,7 @@ function animate() {
   overlayCanvases();
 
   // Update UI
-  ctx.drawImage(soundEnabled ? unmuteImage : muteImage, 10, 10, 60, 60);
+  updateMuteButton();
   updateScore();
   
   // Remove old missiles and particles
@@ -237,5 +298,6 @@ Promise.all([
   new Promise((resolve) => (missileImage.onload = resolve)),
   new Promise((resolve) => (bgImage.onload = resolve))
 ]).then(() => {
+  drawImageScaled();
   animate(); // Start animation loop after images are loaded
 });

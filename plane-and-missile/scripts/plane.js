@@ -1,26 +1,29 @@
 export default class Plane {
-  constructor(x, y, speed, target) {
+  constructor(x, y, speed, scale) {
     this.x = x;
     this.y = y;
     this.speed = speed;
     this.target = {x: 0, y: 0};
     this.flipped = false;
-    this.size = 40;
+    this.angle = 0;
+    console.log(scale)
+    this.size = 20 * scale;
   }
 
   chase(target) {
     this.target = target;
   }
 
+  updateSpeed(speed) {
+    this.speed = speed;
+  }
+
   move() {
     const dx = this.target.x - this.x;
     const dy = this.target.y - this.y;
     const distance = Math.sqrt(dx * dx + dy * dy);
-    
-    if (dx < 0) {
-      this.flipped = true;
-    } else if (dx > 0) {
-      this.flipped = false;
+    if (distance > 0) {
+      this.angle = Math.atan2(dy, dx);
     }
 
     if (distance > this.speed) {
@@ -34,14 +37,11 @@ export default class Plane {
 
   drawObj(ctx, img) {
     const sz = this.size;
-    if (this.flipped) {
-      ctx.save();
-      ctx.scale(-1, 1);
-      ctx.drawImage(img, -(this.x + sz / 2), this.y - sz / 2, sz, sz);
-      ctx.restore();
-    } else {
-     ctx.drawImage(img, this.x - sz / 2, this.y - sz / 2, sz, sz);
-    }
+    ctx.save();
+    ctx.translate(this.x, this.y);
+    ctx.rotate(this.angle + Math.PI / 2);
+    ctx.drawImage(img, -sz / 2, -sz / 2, sz, sz);
+    ctx.restore();
   }
 
   drawLight(ctx, img) {

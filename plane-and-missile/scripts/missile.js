@@ -1,5 +1,5 @@
 export default class Missile {
-  constructor(x, y, speed, target) {
+  constructor(x, y, speed, target, scale) {
     this.x = x;
     this.y = y;
     this.speed = speed * (Math.random() + 0.5);
@@ -8,7 +8,7 @@ export default class Missile {
     this.targetHit = false;
     this.missileHit = false;
     this.angle = 0;
-    this.size = 40;
+    this.size = 20 * scale;
     this.repulsion = 0;
   }
 

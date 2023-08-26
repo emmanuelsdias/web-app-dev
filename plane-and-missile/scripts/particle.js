@@ -1,8 +1,8 @@
 export default class Particle {
-  constructor(x, y, color) {
+  constructor(x, y, size, color) {
     this.x = x;
     this.y = y;
-    this.size = 6;
+    this.size = size;
     this.color = color;
     this.velocity = {
       x: (Math.random() - 0.5) * 5,
@@ -22,7 +22,10 @@ export default class Particle {
   }
 
   drawLight(ctx, img) {
+    ctx.save();
+    ctx.globalAlpha = this.lifespan / 60;
     ctx.drawImage(img, this.x - img.width / 2, this.y - img.height / 2);
+    ctx.restore();
   }
 
   drawObj(ctx) {

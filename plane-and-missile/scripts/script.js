@@ -27,8 +27,6 @@ const bgCtx = bgCnv.getContext("2d");
 const objCnv = document.createElement("canvas");
 const objCtx = objCnv.getContext("2d");
 
-ctx.imageSmoothingEnabled = false;
-
 function resizeCanvases() {
   cnv.width = innerWidth;
   cnv.height = innerHeight;
@@ -39,6 +37,7 @@ function resizeCanvases() {
 
   bgCnv.width = cnv.width;
   bgCnv.height = cnv.height;
+  bgCtx.imageSmoothingEnabled = false;
 
   objCnv.width = cnv.width;
   objCnv.height = cnv.height;
@@ -190,9 +189,9 @@ cnv.addEventListener("click", async (e) => {
 
 
 //--- LIGHTS ---///
-const tinyLight = makeCircleLight(20);
-const smallLight = makeCircleLight(50);
-const largeLight = makeCircleLight(100);
+const tinyLight = makeCircleLight(6 * scaling);
+const smallLight = makeCircleLight(20 * (1 + scaling));
+const largeLight = makeCircleLight(20 * (2 + scaling));
 
 
 //--- GAME OBJECTS AND FUNCTIONS ---//
@@ -212,7 +211,7 @@ function newGame() {
 
 function explode(target, color) {
   for (let i = 0; i < 20; i++) {
-    particles.push(new Particle(target.x, target.y, color));
+    particles.push(new Particle(target.x, target.y, 2 * scaling, color));
   }
 }
 

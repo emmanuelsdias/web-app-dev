@@ -92,10 +92,10 @@ muteImage.src    = "./assets/images/mute.png";
 unmuteImage.src  = "./assets/images/unmute.png";
 
 function updateTextStyle() {
-  ctx.font = `${20 * scaling}px PixelFont, sans-serif`;
-  ctx.fillStyle = COLORS.WHITE;
-  ctx.textAlign = "center";
-  ctx.textBaseline = "top";
+  objCtx.font = `${20 * scaling}px PixelFont, sans-serif`;
+  objCtx.fillStyle = COLORS.WHITE;
+  objCtx.textAlign = "center";
+  objCtx.textBaseline = "top";
 }
 updateTextStyle();
 
@@ -170,11 +170,15 @@ cnv.addEventListener("mousemove", (e) => {
   mouse.y = e.clientY
 });
 
+let newGameWaiting = true;
 let recentLaunch;
 // Left-click instead of right-click
 cnv.addEventListener("click", async (e) => {
   if (mouse.x >= 20 && mouse.x <= 20 * (1 + scaling) && mouse.y >= 20 && mouse.y <= 20 * (1 + scaling)) {
     soundEnabled = !soundEnabled;
+  } else if (newGameWaiting) {
+    newGame();
+    newGameWaiting = false;
   } else if (!recentLaunch) {
     recentLaunch = true;
     if (missiles.length > 0) {
@@ -200,6 +204,16 @@ let particles;
 let missiles;
 let score;
 
+function displayNewGameScreen() {
+  objCtx.fillText("NEW GAME!", cnv.width / 2, cnv.height / 2 - 20 * scaling);
+  objCtx.fillText("CLICK OR TAP", cnv.width / 2, cnv.height / 2);
+  objCtx.fillText("TO BEGIN", cnv.width / 2, cnv.height / 2 + 20 * scaling);
+
+  if (typeof score !== "undefined" && score !== null) {
+    objCtx.fillText(`LAST SCORE: ${score}`, cnv.width / 2, cnv.height - 20 * (1 + scaling));
+  }
+}
+
 function newGame() {
   score = 0;
   plane = new Plane(mouse.x, mouse.y, planeSpeed, scaling);
@@ -217,7 +231,7 @@ function explode(target, color) {
 
 function updateMuteButton() {
   const displayedImage = soundEnabled ? unmuteImage : muteImage;
-  ctx.drawImage(displayedImage, 20, 20, 20 * scaling, 20 * scaling);
+  objCtx.drawImage(displayedImage, cnv.width - 20 * (1 + scaling), cnv.height - 20 * (1 + scaling), 20 * scaling, 20 * scaling);
 }
 
 function updateScore() {
@@ -226,7 +240,7 @@ function updateScore() {
       score += 1;
     }
   }
-  ctx.fillText(`SCORE: ${score}`, cnv.width / 2, 20);
+  objCtx.fillText(`SCORE: ${score}`, cnv.width / 2, 20);
 }
 
 
@@ -243,8 +257,7 @@ function resetParameters() {
   planeSpeed = 2 * missileSpeed;
   if (typeof plane !== "undefined" && plane !== null) {
     plane.updateSpeed(planeSpeed);
-}
-
+  }
 }
 
 resetParameters();
@@ -255,41 +268,50 @@ function animate() {
   // Clear canvas
   clearCanvases();
   
-  // Update objects
-  for (const particle of particles) {
-    particle.update(lightCtx, tinyLight, objCtx);
+  if (newGameWaiting) {
+    displayNewGameScreen();
+  } else {
+    // Update objects
+    for (const particle of particles) {
+      particle.update(lightCtx, tinyLight, objCtx);
+    }
+    for (const missile of missiles) {
+      missile.update(missiles, lightCtx, smallLight, objCtx, missileImage);
+      if (missile.missileHit) {
+        playMissileExplodeSound();
+        explode(missile, COLORS.WHITE);
+      } else if (missile.targetHit) {
+        plane.die();
+        playPlaneExplodeSound();
+        explode(plane, COLORS.WHITE);
+        explode(plane, COLORS.YELLOW);
+        explode(plane, COLORS.BLUE);
+        explode(plane, COLORS.RED);
+      } 
+    }
+    plane.update(lightCtx, largeLight, objCtx, planeImage);
+  
+    // Update UI
+    updateMuteButton();
+    updateScore();
+    
+    // Remove old missiles and particles
+    missiles = missiles.filter(missile => !missile.missileHit && !missile.targetHit);
+    particles = particles.filter(particle => !particle.end);
+
+    // Check end game
+    if (plane.deathAnimationEnded()) {
+      newGameWaiting = true;
+    }
+    
   }
-  for (const missile of missiles) {
-    missile.update(missiles, lightCtx, smallLight, objCtx, missileImage);
-    if (missile.missileHit) {
-      playMissileExplodeSound();
-      explode(missile, COLORS.WHITE);
-    } else if (missile.targetHit) {
-      playPlaneExplodeSound();
-      explode(plane, COLORS.WHITE);
-      explode(plane, COLORS.YELLOW);
-      explode(plane, COLORS.BLUE);
-      explode(plane, COLORS.RED);
-    } 
-  }
-  plane.update(lightCtx, largeLight, objCtx, planeImage);
 
   // Overlay canvases
   overlayCanvases();
-
-  // Update UI
-  updateMuteButton();
-  updateScore();
   
-  // Remove old missiles and particles
-  missiles = missiles.filter(missile => !missile.missileHit && !missile.targetHit);
-  particles = particles.filter(particle => !particle.end);
-
   // Loop animation
   requestAnimationFrame(animate);
 }
-
-newGame();
 
 // Wait for images to load before starting animation
 Promise.all([

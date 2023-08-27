@@ -3,13 +3,13 @@ export default class Missile {
     this.x = x;
     this.y = y;
     this.speed = speed * (Math.random() + 0.5);
+    this.repulsion = 0;
+    this.angle = 0;
+    this.size = 20 * scale;
     this.target = target;
     this.launched = false;
     this.targetHit = false;
     this.missileHit = false;
-    this.angle = 0;
-    this.size = 20 * scale;
-    this.repulsion = 0;
   }
 
   launch(target) {
@@ -84,7 +84,9 @@ export default class Missile {
   
   update(missiles, lightCtx, light, objCtx, missileImage) {
     this.checkSurroundings(missiles);
-    this.move();
+    if (!this.target.dying) {
+      this.move();
+    }
     this.drawLight(lightCtx, light);
     this.drawObj(objCtx, missileImage);
   }

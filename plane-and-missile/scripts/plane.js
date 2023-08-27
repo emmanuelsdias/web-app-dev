@@ -3,11 +3,11 @@ export default class Plane {
     this.x = x;
     this.y = y;
     this.speed = speed;
-    this.target = {x: 0, y: 0};
-    this.flipped = false;
     this.angle = 0;
-    console.log(scale)
     this.size = 20 * scale;
+    this.target = {x: 0, y: 0};
+    this.dying = false;
+    this.deathTimer = 100;
   }
 
   chase(target) {
@@ -16,6 +16,17 @@ export default class Plane {
 
   updateSpeed(speed) {
     this.speed = speed;
+  }
+
+  die() {
+    this.dying = true;
+  }
+
+  deathAnimationEnded() {
+    if (this.deathTimer > 0) {
+      return false;
+    }
+    return true;
   }
 
   move() {
@@ -38,6 +49,7 @@ export default class Plane {
   drawObj(ctx, img) {
     const sz = this.size;
     ctx.save();
+    ctx.globalAlpha = this.deathTimer / 100;
     ctx.translate(this.x, this.y);
     ctx.rotate(this.angle + Math.PI / 2);
     ctx.drawImage(img, -sz / 2, -sz / 2, sz, sz);
@@ -49,7 +61,13 @@ export default class Plane {
   }
 
   update(lightCtx, light, objCtx, planeImage) {
-    this.move();
+    if (!this.dying) {
+      this.move();
+    }
+    else {
+      this.angle += Math.PI / 60;
+      this.deathTimer -= 1;
+    }
     this.drawLight(lightCtx, light);
     this.drawObj(objCtx, planeImage);
   }

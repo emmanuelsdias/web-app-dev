@@ -31,7 +31,7 @@ function resizeCanvases() {
   cnv.width = innerWidth;
   cnv.height = innerHeight;
   ctx.imageSmoothingEnabled = false;
-  
+
   lightCnv.width = cnv.width;
   lightCnv.height = cnv.height;
 
@@ -67,10 +67,10 @@ resizeCanvases();
 let scaling;
 
 function updateIdealScaling() {
-  let vibes = Math.max(cnv.width, cnv.height) / 200 ;
-  if (vibes > 6) {
+  let vibes = Math.min(cnv.width, cnv.height) / 200;
+  if (vibes > 4) {
     scaling = 3;
-  } else if (vibes > 3) {
+  } else if (vibes > 2) {
     scaling = 2;
   } else {
     scaling = 1;
@@ -100,18 +100,18 @@ function updateTextStyle() {
 updateTextStyle();
 
 function drawImageScaled() {
-  const canvas = bgCtx.canvas ;
-  const hRatio = canvas.width  / bgImage.width    ;
-  const vRatio =  canvas.height / bgImage.height  ;
-  const ratio  = Math.max(hRatio, vRatio);
-  const centerShiftX = (canvas.width - bgImage.width*ratio) / 2;
-  const centerShiftY = (canvas.height - bgImage.height*ratio) / 2;  
-  bgCtx.drawImage(bgImage, 
-                  0,                   0, 
-                  bgImage.width,       bgImage.height,
-                  centerShiftX,        centerShiftY,
-                  bgImage.width*ratio, bgImage.height*ratio
-  );  
+  const canvas = bgCtx.canvas;
+  const hRatio = canvas.width / bgImage.width;
+  const vRatio = canvas.height / bgImage.height;
+  const ratio = Math.max(hRatio, vRatio);
+  const centerShiftX = (canvas.width - bgImage.width * ratio) / 2;
+  const centerShiftY = (canvas.height - bgImage.height * ratio) / 2;
+  bgCtx.drawImage(bgImage,
+    0, 0,
+    bgImage.width, bgImage.height,
+    centerShiftX, centerShiftY,
+    bgImage.width * ratio, bgImage.height * ratio
+  );
 }
 
 
@@ -174,7 +174,10 @@ let newGameWaiting = true;
 let recentLaunch;
 // Left-click instead of right-click
 cnv.addEventListener("click", async (e) => {
-  if (mouse.x >= 20 && mouse.x <= 20 * (1 + scaling) && mouse.y >= 20 && mouse.y <= 20 * (1 + scaling)) {
+  if ( mouse.x >= cnv.width - 20 * (1 + scaling)
+    && mouse.x <= cnv.width - 20
+    && mouse.y >= cnv.height - 20 * (1 + scaling)
+    && mouse.y <= cnv.height - 20) {
     soundEnabled = !soundEnabled;
   } else if (newGameWaiting) {
     newGame();
@@ -267,7 +270,7 @@ resetParameters();
 function animate() {
   // Clear canvas
   clearCanvases();
-  
+
   if (newGameWaiting) {
     displayNewGameScreen();
   } else {
@@ -287,14 +290,14 @@ function animate() {
         explode(plane, COLORS.YELLOW);
         explode(plane, COLORS.BLUE);
         explode(plane, COLORS.RED);
-      } 
+      }
     }
     plane.update(lightCtx, largeLight, objCtx, planeImage);
-  
+
     // Update UI
     updateMuteButton();
     updateScore();
-    
+
     // Remove old missiles and particles
     missiles = missiles.filter(missile => !missile.missileHit && !missile.targetHit);
     particles = particles.filter(particle => !particle.end);
@@ -303,12 +306,11 @@ function animate() {
     if (plane.deathAnimationEnded()) {
       newGameWaiting = true;
     }
-    
   }
 
   // Overlay canvases
   overlayCanvases();
-  
+
   // Loop animation
   requestAnimationFrame(animate);
 }

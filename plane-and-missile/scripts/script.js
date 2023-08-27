@@ -171,18 +171,19 @@ cnv.addEventListener("mousemove", (e) => {
 });
 
 let newGameWaiting = true;
+let planeDyingAnimation;
 let recentLaunch;
 // Left-click instead of right-click
 cnv.addEventListener("click", async (e) => {
-  if ( mouse.x >= cnv.width - 20 * (1 + scaling)
-    && mouse.x <= cnv.width - 20
-    && mouse.y >= cnv.height - 20 * (1 + scaling)
-    && mouse.y <= cnv.height - 20) {
-    soundEnabled = !soundEnabled;
-  } else if (newGameWaiting) {
+  if (newGameWaiting) {
     newGame();
     newGameWaiting = false;
-  } else if (!recentLaunch) {
+  } else if ( mouse.x >= cnv.width - 20 * (1 + scaling)
+           && mouse.x <= cnv.width - 20
+           && mouse.y >= cnv.height - 20 * (1 + scaling)
+           && mouse.y <= cnv.height - 20) {
+    soundEnabled = !soundEnabled;
+  } else if (!recentLaunch && !planeDyingAnimation) {
     recentLaunch = true;
     if (missiles.length > 0) {
       missiles[missiles.length - 1].launch(plane);
@@ -208,12 +209,14 @@ let missiles;
 let score;
 
 function displayNewGameScreen() {
+  objCtx.textBaseline = "middle";
   objCtx.fillText("NEW GAME!", cnv.width / 2, cnv.height / 2 - 20 * scaling);
   objCtx.fillText("CLICK OR TAP", cnv.width / 2, cnv.height / 2);
   objCtx.fillText("TO BEGIN", cnv.width / 2, cnv.height / 2 + 20 * scaling);
 
   if (typeof score !== "undefined" && score !== null) {
-    objCtx.fillText(`LAST SCORE: ${score}`, cnv.width / 2, cnv.height - 20 * (1 + scaling));
+    objCtx.textBaseline = "bottom";
+    objCtx.fillText(`LAST SCORE: ${score}`, cnv.width / 2, cnv.height - 20);
   }
 }
 
@@ -221,6 +224,7 @@ function newGame() {
   score = 0;
   plane = new Plane(mouse.x, mouse.y, planeSpeed, scaling);
   plane.chase(mouse);
+  planeDyingAnimation = false;
   particles = [];
   missiles = [];
   missiles.push(new Missile(startMissileX, startMissileY, missileSpeed, plane, scaling));
@@ -243,6 +247,7 @@ function updateScore() {
       score += 1;
     }
   }
+  objCtx.textBaseline = "top";
   objCtx.fillText(`SCORE: ${score}`, cnv.width / 2, 20);
 }
 
@@ -285,6 +290,7 @@ function animate() {
         explode(missile, COLORS.WHITE);
       } else if (missile.targetHit) {
         plane.die();
+        planeDyingAnimation = true;
         playPlaneExplodeSound();
         explode(plane, COLORS.WHITE);
         explode(plane, COLORS.YELLOW);

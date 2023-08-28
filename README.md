@@ -19,6 +19,7 @@ Throughout the project, I learned the foundations of HTML, CSS, and Javascript, 
 
 ## Plane and Missile
 
-This project involved building an interactive animation, featuring a plane that follows the cursor's movement, and a missile that points towards the plane's position. Upon right-clicking, the missile is launched towards the plane and, upon impact, triggers an explosion. The animation includes sound effects, with the ability to toggle sound on or off. This project combines Canvas rendering, user interaction, and audio integration to create an engaging visual and auditory experience.
+![Plane and Missile Screenshot Preview](./previews/plane-and-missile_banner.png)
 
+This project involved building an interactive animation, featuring a plane that follows the cursor's movement, and a missile that points towards the plane's position. Upon left-clicking, the missile is launched towards the plane and, upon impact, triggers an explosion. The animation should include sound effects, with the ability to toggle sound on or off. However, the project ended up being more developed than the original prompt, so I ended up turning it into a minigame with multiple missiles, self collisions and a score. This project combines Canvas rendering, user interaction, and audio integration to create an engaging visual and auditory experience.
 

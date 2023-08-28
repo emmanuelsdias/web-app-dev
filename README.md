@@ -2,12 +2,12 @@
 
 This repository contains a collection of projects developed for the course CES-26: Web Application Development at ITA (Instituto Tecnológico de Aeronáutica, Brazil). Each project is organized within its own folder and showcases the skills and concepts learned throughout the course. The following projects were developed throught the course:
 
-+ High School Webpage
-+ Plane and Missile
++ [High School Webpage](https://emmanuelsdias.github.io/web-app-dev/high-school-webpage/)
++ [Plane and Missile](https://emmanuelsdias.github.io/web-app-dev/plane-and-missile/)
 
 ## High School Webpage
 
-This project involved building a set of web pages with information about my High School. The pages should be directed towards four different groups: students, professors, administration, and outside visitors, applying a different style to each of their pages. Additionally, the pages should be responsive. The project's website [can be viewed here](https://emmanuelsdias.github.io/web-app-dev/high-school-webpage/index.html).
+This project involved building a set of web pages with information about my High School. The pages should be directed towards four different groups: students, professors, administration, and outside visitors, applying a different style to each of their pages. Additionally, the pages should be responsive. The project's website [can be viewed here](https://emmanuelsdias.github.io/web-app-dev/high-school-webpage/).
 
 ### Development process
 
@@ -21,5 +21,14 @@ Throughout the project, I learned the foundations of HTML, CSS, and Javascript, 
 
 ![Plane and Missile Screenshot Preview](./previews/plane-and-missile_banner.png)
 
-This project involved building an interactive animation, featuring a plane that follows the cursor's movement, and a missile that points towards the plane's position. Upon left-clicking, the missile is launched towards the plane and, upon impact, triggers an explosion. The animation should include sound effects, with the ability to toggle sound on or off. However, the project ended up being more developed than the original prompt, so I ended up turning it into a minigame with multiple missiles, self collisions and a score. This project combines Canvas rendering, user interaction, and audio integration to create an engaging visual and auditory experience.
+This project involved building an interactive animation, featuring a plane that follows the cursor's movement, and a missile that points towards the plane's position. Upon left-clicking, the missile is launched towards the plane and, upon impact, triggers an explosion. The animation should include sound effects, with the ability to toggle sound on or off. 
 
+However, the project ended up being expanded outside the original prompt. Some features were added, such as multiple missiles, self collisions and a score. This project combined canvas rendering, user interaction and sound effects to provide a fast-paced mobile-friendly minigame experience! Font and sounds are credited in the assets folder, while the artwork was done by myself (plane pixel art inspired by Embraer's original E2 colors). [Play it here!](https://emmanuelsdias.github.io/web-app-dev/plane-and-missile/).
+
+### Development process
+
+To develop the animation, I began by making a prototype which fulfilled the original prompt. Once the mechanics worked properly, features were added gradually and, after completing them, the final artwork was created to bring the whole experience together. After that, the plane death and new game screen state were added, to give it a replay value. The end touches were making the whole thing mobile-friendly, which involved handling multiple touches to enable the player to move the plane while launching new missiles.
+
+### Lessons learned
+
+Throughout the project, I learned how to use the canvas from HTML, handling multiple canvases and overlaying them. Also, listeners were studied to properly handle the user interaction with the game. Finally, it was a great way to learn mobile stuff such as handling multiple touches and blocking unwanted actions (scrolls, double-taps and pinch zoom).

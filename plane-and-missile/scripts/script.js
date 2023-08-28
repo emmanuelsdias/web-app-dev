@@ -158,30 +158,41 @@ addEventListener('resize', () => {
   resetParameters();
 });
 
-cnv.addEventListener("touchmove", (e) => {
-  let evt = (typeof e.originalEvent === 'undefined') ? e : e.originalEvent;
-  let touch = evt.touches[0] || evt.changedTouches[0];
-  mouse.x = touch.pageX;
-  mouse.y = touch.pageY;
-});
-
 cnv.addEventListener("mousemove", (e) => {
   mouse.x = e.clientX
   mouse.y = e.clientY
 });
 
+cnv.addEventListener("click", (e) => {
+  handleClickOrTouchEvent(mouse.x, mouse.y);
+});
+
+cnv.addEventListener("touchmove", (e) => {
+  e.preventDefault();
+  let evt = (typeof e.originalEvent === 'undefined') ? e : e.originalEvent;
+  let touch = evt.touches[0] || evt.changedTouches[0];
+  mouse.x = touch.pageX;
+  mouse.y = touch.pageY;
+  // While pressing down finger to move the plane, 
+  // the player may trigger clicks with other fingers
+  for (let i = 1; i < evt.touches.length; i++) {
+    let touch = evt.touches[i];
+    handleClickOrTouchEvent(touch.pageX, touch.pageY);
+  }
+});
+
 let newGameWaiting = true;
-let planeDyingAnimation;
 let recentLaunch;
-// Left-click instead of right-click
-cnv.addEventListener("click", async (e) => {
+let planeDyingAnimation;
+
+async function handleClickOrTouchEvent(x, y) {
   if (newGameWaiting) {
     newGame();
     newGameWaiting = false;
-  } else if ( mouse.x >= cnv.width - 20 * (1 + scaling)
-           && mouse.x <= cnv.width - 20
-           && mouse.y >= cnv.height - 20 * (1 + scaling)
-           && mouse.y <= cnv.height - 20) {
+  } else if ( x >= cnv.width - 20 * (1 + scaling)
+           && x <= cnv.width - 20
+           && y >= cnv.height - 20 * (1 + scaling)
+           && y <= cnv.height - 20) {
     soundEnabled = !soundEnabled;
   } else if (!recentLaunch && !planeDyingAnimation) {
     recentLaunch = true;
@@ -193,7 +204,7 @@ cnv.addEventListener("click", async (e) => {
     missiles.push(new Missile(startMissileX, startMissileY, missileSpeed, plane, scaling));
     recentLaunch = false;
   }
-});
+}
 
 
 //--- LIGHTS ---///

@@ -4,6 +4,7 @@ This repository contains a collection of projects developed for the course CES-2
 
 + [High School Webpage](https://emmanuelsdias.github.io/web-app-dev/high-school-webpage/)
 + [Plane and Missile](https://emmanuelsdias.github.io/web-app-dev/plane-and-missile/)
++ [DOM Tree](https://emmanuelsdias.github.io/web-app-dev/dom-tree/)
 
 ## High School Webpage
 
@@ -35,7 +36,7 @@ Throughout the project, I learned how to use the canvas from HTML, handling mult
 
 ## DOM Tree
 
-This project involved creating a DOM (Document Object Model) tree editor using jQuery. The primary goal was to provide a user-friendly interface for manipulating elements within a DOM tree. The user should be able to select the tree nodes, changing their colors upon selection. Finally, they should be able to add, edit or remove an element. 
+This project involved creating a DOM (Document Object Model) tree editor using jQuery. The primary goal was to provide a user-friendly interface for manipulating elements within a DOM tree. The user should be able to select the tree nodes, changing their colors upon selection. Finally, they should be able to add, edit or remove an element. The DOM Tree [can be viewed here](https://emmanuelsdias.github.io/web-app-dev/dom-tree/).
 
 ### Development process
 

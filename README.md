@@ -35,8 +35,14 @@ Throughout the project, I learned how to use the canvas from HTML, handling mult
 
 ## DOM Tree
 
-This project involved creating a DOM (Document Object Model) tree editor using JQuery. The primary goal was to provide a user-friendly interface for manipulating elements within a DOM tree. The user should be able to select the tree nodes, changing their colors upon selection. Finally, they should be able to add, edit or remove an element. 
+This project involved creating a DOM (Document Object Model) tree editor using jQuery. The primary goal was to provide a user-friendly interface for manipulating elements within a DOM tree. The user should be able to select the tree nodes, changing their colors upon selection. Finally, they should be able to add, edit or remove an element. 
 
 ### Development process
 
+First, I created a simple DOM tree and spent a significant amount of time trying to add the branches (paths) and leaves (circles) connecting the items. Then, using jQuery, I added the ability to select a node, changing their color upon selection. Afterward, I implemented the ability to create, edit, and remove nodes. Finally, I replaced the default alerts/prompts with custom alert/prompt boxes, the designs of which I could customize.
+
 ### Lessons learned
+
+Throughout the project, I gained a solid understanding of fundamental jQuery concepts. I learned how to utilize jQuery's methods for selecting elements and performing various CRUD (Create, Read, Update, Delete) operations on them. Additionally, I created custom alert and prompt dialog boxes, which could be tailored to match the project's theme and aesthetics.
+
+However, I recognize that the handling of click events could have been more organized and efficient. Additionally, the functions responsible for submitting input dialogs would benefit from better communication with other functions. A more streamlined approach, involving the passing of parameters rather than multiple document searches for data retrieval, would enhance code clarity and maintainability.

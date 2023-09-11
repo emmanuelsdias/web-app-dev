@@ -1,19 +1,9 @@
 $(document).ready(function () {
   let currentDialog;
 
-  // When no dialogs are up, prevents default click-event
-  function preventDefault(e) {
-    inputDialogShowing = $('#custom-input').is(':visible')
-    alertDialogShowing = $('#custom-alert').is(':visible')
-    if (!inputDialogShowing && !alertDialogShowing) {
-      e.stopPropagation();
-    }
-  }
+  /* NODE FUNCTIONS */ 
 
-  function deselectCurrentNode() {
-    $(".node.selected").removeClass("selected");
-  }
-
+  // Node creation
   function createNewNode(parentNode, text) {
     const newNode = $("<li><span class='node'>" + text + "</span></li>");
     const ul = parentNode.parent().children("ul");
@@ -25,11 +15,28 @@ $(document).ready(function () {
     parentNode.parent().children("ul").append(newNode);
   }
 
+  // Node editing
   function editNode(editingNode, text) {
     editingNode.text(text);
   }
 
-  // Default click event 
+  // Node removal
+  function deselectCurrentNode() {
+    $(".node.selected").removeClass("selected");
+  }
+
+  /* CLICK EVENTS */
+
+  // When no dialogs are up, prevents default click-event
+  function preventDefault(e) {
+    inputDialogShowing = $('#custom-input').is(':visible')
+    alertDialogShowing = $('#custom-alert').is(':visible')
+    if (!inputDialogShowing && !alertDialogShowing) {
+      e.stopPropagation();
+    }
+  }
+
+  // Default click event, hides dialogs and deselects
   $(".main-content, .button-bar").click(function () {
     deselectCurrentNode();
     hideAlertDialog();
@@ -86,6 +93,8 @@ $(document).ready(function () {
       showAlertDialog("Please select a node to remove.");
     }
   });
+
+  /* DIALOG FUNCTIONS */
 
   function showInputDialog(promptText, nodeText="") {
     $("#input-prompt").text(promptText);

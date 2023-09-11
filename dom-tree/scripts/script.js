@@ -1,73 +1,125 @@
 $(document).ready(function () {
-  // Default click event deselects any node
-  $(document).click(function(event) {
-    $(".context-menu.selected").removeClass("selected");
+  let currentDialog;
+
+  // When no dialogs are up, prevents default click-event
+  function preventDefault(e) {
+    inputDialogShowing = $('#custom-input').is(':visible')
+    alertDialogShowing = $('#custom-alert').is(':visible')
+    if (!inputDialogShowing && !alertDialogShowing) {
+      e.stopPropagation();
+    }
+  }
+
+  function deselectCurrentNode() {
+    $(".node.selected").removeClass("selected");
+  }
+
+  function createNewNode(parentNode, text) {
+    const newNode = $("<li><span class='node'>" + text + "</span></li>");
+    const ul = parentNode.parent().children("ul");
+    // If the parent does not have children, create UL
+    if (ul.length === 0) {
+      parentNode.parent().append("<ul></ul>");
+    }
+    // Append the new node to the parent's UL
+    parentNode.parent().children("ul").append(newNode);
+  }
+
+  function editNode(editingNode, text) {
+    editingNode.text(text);
+  }
+
+  // Default click event 
+  $(".main-content, .button-bar").click(function () {
+    deselectCurrentNode();
+    hideAlertDialog();
+    hideInputDialog();
   });
-  
-  // Click event on nodes
-  $(".context-menu").click(function (e) {
+
+  // Node click event
+  $(".node").click(function (e) {
+    preventDefault(e);
     // Deselect old node
-    $(".context-menu.selected").removeClass("selected");
+    deselectCurrentNode();
     // Select clicked node
     $(this).addClass("selected");
-    // Prevent deselect clicked node (from default click event)
-    e.stopPropagation();
   });
 
-  // Add Node Button Click Event
-  $("#add-node").click(function () {
-    const selectedNode = $(".selected");
-
-    // Check if a node is selected
-    if (selectedNode.length > 0) {
-      const newNodeText = prompt("Enter the text for the new node:");
-      if (newNodeText !== null) {
-        const newNode = $("<li><span class='context-menu'>" + newNodeText + "</span></li>");
-        const ul = selectedNode.children("ul");
-
-        // If the selected node doesn't have a nested UL, create one
-        if (ul.length === 0) {
-          selectedNode.append("<ul></ul>");
-        }
-
-        // Append the new node to the selected node's UL
-        selectedNode.children("ul").append(newNode);
-      }
+  // Add node click event
+  $("#add-node").click(function (e) {
+    preventDefault(e);
+    // Check if there is selected node
+    const parentNode = $(".selected");
+    if (parentNode.length > 0) {
+      currentDialog = "create";
+      showInputDialog("New element's content:");
     } else {
-      alert("Please select a node before adding a new one.");
+      showAlertDialog("Please select the new node's parent.");
     }
   });
 
-  // Remove Node Button Click Event
-  $("#remove-node").click(function () {
-    const selectedNode = $(".selected");
+  // Edit node click event
+  $("#edit-node").click(function (e) {
+    preventDefault(e);
+    // Check if there is selected node
+    const editingNode = $(".selected");
+    if (editingNode.length > 0) {
+      currentDialog = "edit";
+      showInputDialog("Edit the element's content:", editingNode.text());
+    } else {
+      showAlertDialog("Please select a node to edit.");
+    }
+  });
 
-    // Check if a node is selected
-    if (selectedNode.length > 0) {
-      if(!selectedNode.hasClass("root")) {
-        selectedNode.parent().remove();
+  // Remove node click event
+  $("#remove-node").click(function (e) {
+    preventDefault(e);
+    // Check if there is selected node
+    const deletingNode = $(".selected");
+    if (deletingNode.length > 0) {
+      if (!deletingNode.hasClass("root")) {
+        deletingNode.parent().remove();
       } else {
-        alert("Can't remove the root node.");
-        e.stopPropagation();
+        showAlertDialog("Can't remove the root node.");
       }
     } else {
-      alert("Please select a node to remove.");
+      showAlertDialog("Please select a node to remove.");
     }
   });
 
-  // Edit Node Button Click Event
-  $("#edit-node").click(function () {
-    const selectedNode = $(".selected");
+  function showInputDialog(promptText, nodeText="") {
+    $("#input-prompt").text(promptText);
+    $("#input-text").val(nodeText);
+    $("#custom-input").show();
+  }
 
-    // Check if a node is selected
-    if (selectedNode.length > 0) {
-      const newText = prompt("Edit the text for the selected node:", selectedNode.text());
-      if (newText !== null) {
-        selectedNode.text(newText);
+  function hideInputDialog() {
+    $("#custom-input").hide();
+  }
+
+  function showAlertDialog(promptText) {
+    $("#alert-prompt").text(promptText);
+    $("#custom-alert").show();
+  }
+
+  function hideAlertDialog() {
+    $("#custom-alert").hide();
+  }
+
+  $("#submit-input").click(function () {
+    const userInput = $("#input-text").val();
+    const selectedNode = $(".selected");
+    if (userInput !== null && userInput.trim() !== "" && selectedNode.length > 0) {
+      if (currentDialog == "create") {
+        createNewNode(selectedNode, userInput);
+      } else {
+        editNode(selectedNode, userInput);
       }
-    } else {
-      alert("Please select a node to edit.");
+      hideInputDialog();
     }
+  });
+
+  $("#cancel-input").click(function () {
+    hideInputDialog();
   });
 });
-

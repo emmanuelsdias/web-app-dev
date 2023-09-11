@@ -160,4 +160,51 @@ body {
   background-color : var(--GREEN);
 }
 
+/* DIALOG CUSTOMIZATION */
+.notification {
+  display          : none;
+  background-color : var(--GRAY);
+  position         : fixed;
+  top              : 50%;
+  left             : 50%;
+  transform        : translate(-50%, -50%);
+  /* min-width        : 300px; */
+  padding          : 20px;
+  color            : white;
+  border-radius    : 5px;
+  box-shadow       : 0 0 10px rgba(0, 0, 0, 0.5);
+  z-index          : 9999;
+}
 
+#input-text {
+  resize        : none;
+  padding       : 10px;
+  width         : calc(100% - 2 * 10px); 
+  border        : 0;
+  border-radius : 5px;
+  margin        : 10px 0;
+}
+
+#input-buttons {
+  display         : flex;
+  justify-content : center;
+  gap             : 10px;
+}
+
+#submit-input,
+#cancel-input {
+  color         : white;
+  padding       : 10px 20px;
+  border        : none;
+  border-radius : 5px;
+  display       : block;
+  cursor        : pointer;
+}
+
+#submit-input {
+  background-color : var(--GREEN);
+}
+
+#cancel-input {
+  background-color : var(--BROWN);
+}

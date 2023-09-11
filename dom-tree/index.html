@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOM Tree Viewer</title>
+  <link rel="icon" href="./assets/images/dom_tree.svg">
+  <link rel="stylesheet" href="./styles/style.css">
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Lato'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+  <div class="button-bar">
+    <button id="add-node" class="square-button"><i class="fas fa-plus"></i></button>
+    <button id="edit-node" class="square-button"><i class="fas fa-edit"></i></button>
+    <button id="remove-node" class="square-button"><i class="fas fa-trash"></i></button>
+  </div>
+  <div class="main-content">
+    <div class="title">
+      <span>DOM Tree</span>
+    </div>
+    <div class="tree">
+      <ul>
+        <li><span class="context-menu root">Root element &lthtml&gt</span>
+          <ul>
+            <li><span class="context-menu">Element: &lthead&gt</span>
+              <ul>
+                <li><span class="context-menu">Element: &lttitle&gt</span>
+                  <ul>
+                    <li><span class="context-menu">Text: "My Title"</span></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><span class="context-menu">Element: &ltbody&gt</span>
+              <ul>
+                <li><span class="context-menu">Element: &lth1&gt</span>
+                  <ul>
+                    <li><span class="context-menu">Text: "A heading"</span></li>
+                  </ul>
+                </li>
+                <li><span class="context-menu">Element: &lta&gt</span>
+                  <ul>
+                    <li><span class="context-menu">Text: "Link text"</span></li>
+                    <li><span class="context-menu">Attribute: href</span></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+
+            <li><span class="context-menu">Element: &lthead&gt</span>
+              <ul>
+                <li><span class="context-menu">Element: &lttitle&gt</span>
+                  <ul>
+                    <li><span class="context-menu">Text: "My Title"</span></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><span class="context-menu">Element: &ltbody&gt</span>
+              <ul>
+                <li><span class="context-menu">Element: &lth1&gt</span>
+                  <ul>
+                    <li><span class="context-menu">Text: "A heading"</span></li>
+                  </ul>
+                </li>
+                <li><span class="context-menu">Element: &lta&gt</span>
+                  <ul>
+                    <li><span class="context-menu">Text: "Link text"</span></li>
+                    <li><span class="context-menu">Attribute: href</span></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><span class="context-menu">Element: &lthead&gt</span>
+              <ul>
+                <li><span class="context-menu">Element: &lttitle&gt</span>
+                  <ul>
+                    <li><span class="context-menu">Text: "My Title"</span></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><span class="context-menu">Element: &ltbody&gt</span>
+              <ul>
+                <li><span class="context-menu">Element: &lth1&gt</span>
+                  <ul>
+                    <li><span class="context-menu">Text: "A heading"</span></li>
+                  </ul>
+                </li>
+                <li><span class="context-menu">Element: &lta&gt</span>
+                  <ul>
+                    <li><span class="context-menu">Text: "Link text"</span></li>
+                    <li><span class="context-menu">Attribute: href</span></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="./scripts/script.js"></script>
+</body>
+
+</html>

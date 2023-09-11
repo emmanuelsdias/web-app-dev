@@ -1,0 +1,163 @@
+:root {
+  --BROWN       : #66430D;
+  --GREEN       : #80B40A;
+  --LIGHT-GREEN : #B8CD0E;
+  --GRAY        : #333333;
+  --WHITE       : #F0F0F0;
+}
+
+* {
+  margin  : 0;
+  padding : 0;
+}
+
+body {
+  background-color : var(--WHITE);
+  padding          : 0 !important;
+  margin           : 0 !important;
+  float            : none !important;
+  width            : 100vw;
+  min-height       : 100vh;
+  font-family      : "Lato";
+  display          : flex;
+}
+
+.button-bar {
+  background-color : var(--GRAY); 
+  padding          : 20px; 
+  position         : fixed;
+  top              : 0; 
+  left             : 0;
+  bottom           : 0;
+  z-index          : 999;
+  display          : flex; 
+  flex-direction   : column;
+  gap              : 1rem;
+  box-shadow       : 0 0 10px rgba(0, 0, 0, 0.8);
+}
+
+.main-content {
+  padding     : 20px;
+  flex-grow   : 1; 
+  margin-left : calc(2 * 20px + 3rem);
+}
+
+@media (max-width: 768px) {
+  body {
+    flex-direction : column;
+  }
+
+  .button-bar {
+    right           : 0;
+    bottom          : auto;
+    flex-direction  : row;
+    justify-content : center;
+  }
+
+  .main-content {
+    margin-top  : calc(2 * 20px + 3rem);
+    margin-left : 0;
+  }
+}
+
+/* TITLE CUSTOMIZATION */
+@font-face {
+  font-family : 'BlockyFont';
+  font-style  : normal;
+  font-weight : 400;
+  src         : url('../assets/fonts/Gameria.ttf') format('truetype'); 
+}
+
+.title {
+  font-family : 'BlockyFont';
+  margin      : 1rem 0 -2px 0.5rem;
+  font-size   : 3rem;
+  color       : var(--BROWN);
+  text-align  : left;
+  white-space : nowrap;
+}
+
+/* BUTTONS CUSTOMIZATION */
+.square-button {
+  color            : var(--WHITE);
+  background-color : var(--GREEN);
+  border           : none;
+  display          : block;
+  font-size        : 1.2rem;
+  width            : 3rem;
+  height           : 3rem;
+  border-radius    : 30%; 
+}
+
+.square-button:hover{
+  background-color : var(--LIGHT-GREEN);
+  cursor           : pointer;
+}
+
+/* TREE CUSTOMIZATION */
+.tree {
+  --spacing   : 1.5rem;
+  --radius    : 0.6rem;
+  --width     : 4px;
+  margin-left : calc(var(--spacing) + 1rem);
+}
+
+.tree span {
+  white-space : nowrap;
+}
+
+.tree li {
+  display      : block;
+  position     : relative;
+  margin-left  : calc(-1 * var(--width));
+  padding-left : calc(var(--spacing) + 1rem);
+}
+
+.tree ul {
+  margin-left  : -1rem;
+  padding-left : 0;
+}
+
+.tree ul li {
+  margin-top  : var(--spacing);
+  border-left : var(--width) solid var(--BROWN);
+}
+
+.tree ul li:last-child {
+  border-color : transparent;
+}
+
+.tree ul li::before {
+  content      : '';
+  display      : block;
+  position     : absolute;
+  top          : calc(-1 * (var(--spacing) + 0.5em + var(--width)));
+  left         : calc(-1 * var(--width));
+  width        : var(--spacing);
+  height       : calc(var(--spacing) + 1em + 0.5 * var(--width));
+  border       : solid var(--BROWN);
+  border-width : 0 0 var(--width) var(--width);
+}
+
+.tree li::after {
+  content       : '';
+  display       : block;
+  position      : absolute;
+  top           : calc(0.5rem - var(--radius));
+  left          : calc(var(--spacing) - var(--radius) - 0.5 * var(--width));
+  width         : calc(2 * var(--radius));
+  height        : calc(2 * var(--radius));
+  border-radius : 30%;
+  background    : var(--GREEN);
+}
+
+.tree li span:hover {
+  background-color : var(--LIGHT-GREEN);
+  cursor           : pointer;
+}
+
+.selected {
+  background-color : var(--GREEN);
+}
+
+

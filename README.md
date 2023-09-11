@@ -32,3 +32,11 @@ To develop the animation, I began by making a prototype which fulfilled the orig
 ### Lessons learned
 
 Throughout the project, I learned how to use the canvas from HTML, handling multiple canvases and overlaying them. Also, listeners were studied to properly handle the user interaction with the game. Finally, it was a great way to learn mobile stuff such as handling multiple touches and blocking unwanted actions (scrolls, double-taps and pinch zoom).
+
+## DOM Tree
+
+This project involved creating a DOM (Document Object Model) tree editor using JQuery. The primary goal was to provide a user-friendly interface for manipulating elements within a DOM tree. The user should be able to select the tree nodes, changing their colors upon selection. Finally, they should be able to add, edit or remove an element. 
+
+### Development process
+
+### Lessons learned

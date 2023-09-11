@@ -1,0 +1,4 @@
+Icon design adapted from Material Icons' Account Tree.
+
+Font downloaded from https://www.dafont.com/:
+- Gameria.tff: https://www.dafont.com/pt/gameria.font

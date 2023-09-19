@@ -6,7 +6,7 @@ This repository contains a collection of projects developed for the course CES-2
 + [Plane and Missile](https://emmanuelsdias.github.io/web-app-dev/plane-and-missile/)
 + [DOM Tree](https://emmanuelsdias.github.io/web-app-dev/dom-tree/)
 
-## High School Webpage
+## High School Webpage <img src="./high-school-webpage/assets/distintivo-cmpa.svg" alt="Icon" height="24"/>
 
 This project involved building a set of web pages with information about my High School. The pages should be directed towards four different groups: students, professors, administration, and outside visitors, applying a different style to each of their pages. Additionally, the pages should be responsive. The project's website [can be viewed here](https://emmanuelsdias.github.io/web-app-dev/high-school-webpage/).
 
@@ -18,7 +18,7 @@ To develop my High School's webpage, I began by studying my High School's existi
 
 Throughout the project, I learned the foundations of HTML, CSS, and Javascript, as well as how to structure files in an organized manner. Although I attempted to reuse the header, navigation bar, and footer codes by appending them to external `.html` files and then importing them using scripts, I was not satisfied with the end result (blinking of the header etc. due to the loading time of the scripts). In the end, I chose to duplicate the code throughout all the pages, focusing on providing a better user experience. This project was also a great opportunity to learn about efficiently grouping elements together to target them with CSS and to explore basic ways of implementing responsiveness in a website.
 
-## Plane and Missile
+## Plane and Missile <img src="./plane-and-missile/assets/images/plane.png" alt="Icon" height="24"/>
 
 ![Plane and Missile Screenshot Preview](./previews/plane-and-missile_banner.png)
 
@@ -34,7 +34,7 @@ To develop the animation, I began by making a prototype which fulfilled the orig
 
 Throughout the project, I learned how to use the canvas from HTML, handling multiple canvases and overlaying them. Also, listeners were studied to properly handle the user interaction with the game. Finally, it was a great way to learn mobile stuff such as handling multiple touches and blocking unwanted actions (scrolls, double-taps and pinch zoom).
 
-## DOM Tree
+## DOM Tree <img src="./dom-tree/assets/images/dom_tree.svg" alt="Icon" height="24"/>
 
 This project involved creating a DOM (Document Object Model) tree editor using jQuery. The primary goal was to provide a user-friendly interface for manipulating elements within a DOM tree. The user should be able to select the tree nodes, changing their colors upon selection. Finally, they should be able to add, edit or remove an element. The DOM Tree [can be viewed here](https://emmanuelsdias.github.io/web-app-dev/dom-tree/).
 

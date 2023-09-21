@@ -1,0 +1,52 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+@font-face {
+  font-family: 'PixelFont';
+  src: url('../assets/fonts/04b_19.ttf') format('truetype'); 
+}
+.container {
+  margin     : 0 auto;
+  padding    : 20px;
+  max-width  : 502px;
+  max-height : 502px;
+  min-height : 202px;
+  min-width  : 202px;
+}
+
+h1 {
+  font-family : 'PixelFont';
+  text-align: center;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+label {
+  margin-right: 10px;
+}
+
+select, button {
+  padding: 5px;
+  font-size: 14px;
+}
+
+.board-container {
+  display: grid;
+  border: 1px solid #333;
+  background-color: #fff;
+}
+
+.pixel {
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.pixel:hover {
+  background-color: #777;
+}

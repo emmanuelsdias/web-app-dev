@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pixel Art Editor</title>
+  <link rel="icon" href="./assets/images/icon_white.svg">
+  <link rel="stylesheet" href="./styles/styles.css">
+</head>
+
+<body>
+  <div class="container">
+    <h1>Pixel Art Editor</h1>
+    <div class="controls">
+      <label for="board-size">Artboard Size:</label>
+      <select id="board-size">
+        <option value="16">16x16</option>
+        <option value="32">32x32</option>
+        <option value="64">64x64</option>
+      </select>
+      <button id="clear-board">Clear</button>
+    </div>
+    <div class="board-container"></div>
+  </div>
+  <script src="./scripts/main.js" type="module"></script>
+</body>
+
+</html>

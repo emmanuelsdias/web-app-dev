@@ -5,6 +5,7 @@ This repository contains a collection of projects developed for the course CES-2
 + [High School Webpage](https://emmanuelsdias.github.io/web-app-dev/high-school-webpage/)
 + [Plane and Missile](https://emmanuelsdias.github.io/web-app-dev/plane-and-missile/)
 + [DOM Tree](https://emmanuelsdias.github.io/web-app-dev/dom-tree/)
++ [Pixel Art Editor](https://emmanuelsdias.github.io/web-app-dev/pixel-art-editor/)
 
 ## High School Webpage
 
@@ -47,3 +48,5 @@ First, I created a simple DOM tree and spent a significant amount of time trying
 Throughout the project, I gained a solid understanding of fundamental jQuery concepts. I learned how to utilize jQuery's methods for selecting elements and performing various CRUD (Create, Read, Update, Delete) operations on them. Additionally, I created custom alert and prompt dialog boxes, which could be tailored to match the project's theme and aesthetics.
 
 However, I recognize that the handling of click events could have been more organized and efficient. Additionally, the functions responsible for submitting input dialogs would benefit from better communication with other functions. A more streamlined approach, involving the passing of parameters rather than multiple document searches for data retrieval, would enhance code clarity and maintainability.
+
+## Pixel Art Editor

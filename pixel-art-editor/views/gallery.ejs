@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pixel Art Editor</title>
+  <link rel="icon" href="/public/assets/images/icon_black.svg">
+  <link rel="stylesheet" href="/public/css/style.css">
+</head>
+
+<body>
+  <header>
+    <img src="/public/assets/images/icon_black.svg">
+    <h1>Pixel Art Editor</h1>
+  </header>
+  <nav>
+    <div class="nav-menu">
+      <ul>
+        <li><a href="../creation">creation</a></li>
+        <li><a href="../gallery">gallery</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="gallery-grid">
+    <% for (let i=0; i < pngFiles.length; i++) { %>
+      <img class="pixel-image" src="/uploads/<%= pngFiles[i] %>" alt="Pixel Art <%= i + 1 %>">
+    <% } %>
+  </div>
+</body>
+
+</html>

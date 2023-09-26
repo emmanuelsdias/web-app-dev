@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pixel Art Editor</title>
+  <link rel="icon" href="/public/assets/images/icon_white.svg">
+  <link rel="stylesheet" href="/public/css/style.css">
+</head>
+
+<body>
+  <header>
+    <img src="/public/assets/images/icon_black.svg">
+    <h1>Pixel Art Editor</h1>
+  </header>
+  <nav>
+    <div class="nav-menu">
+      <ul>
+        <li><a href="../creation">creation</a></li>
+        <li><a href="../gallery">gallery</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="container">
+    <div class="board-container"></div>
+    <div class="controls">
+      <label for="board-size">artboard size:</label>
+      <select id="board-size">
+        <option value="16">16x16</option>
+        <option value="32">32x32</option>
+        <option value="64">64x64</option>
+      </select>
+      <button id="clear-board">Clear</button>
+    </div>
+  </div>
+  <script src="/public/js/creation.js" type="module"></script>
+</body>
+
+</html>

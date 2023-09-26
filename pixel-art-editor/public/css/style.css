@@ -1,0 +1,113 @@
+body {
+  font-family : monospace, monospace;
+  margin      : 0;
+  padding     : 0;
+}
+
+/* GENERAL */
+@font-face {
+  font-family : 'PixelFont';
+  src         : url('../assets/fonts/04b_19.ttf') format('truetype'); 
+}
+
+header {
+  padding-top     : 1rem;
+  display         : flex;
+  justify-content : center;
+  align-items     : center;
+  gap             : 1rem;
+}
+
+header img {
+  display : block;
+  height  : 3rem;
+}
+
+header h1 {
+  margin      : 0;
+  white-space : nowrap;
+  font-family : 'PixelFont';
+  text-align  : center;
+}
+
+nav ul {
+  list-style-type : none;
+  margin          : 0;
+  padding         : 0;
+  overflow        : hidden;
+  display         : flex;
+  justify-content : center;
+}
+
+nav li {
+  padding : 0.8rem 1rem;
+}
+
+nav li a {
+  display       : block;
+  text-align    : center;
+  border-bottom : 1.5px solid #000
+}
+
+a,a:link,a:visited,a:hover,a:focus,a:active{
+ text-decoration : none;
+ color           : inherit;
+}
+
+
+/* CREATION */
+.container {
+  margin     : 0 auto;
+  padding    : 20px;
+  max-width  : 502px;
+  max-height : 502px;
+  min-height : 202px;
+  min-width  : 202px;
+}
+
+.controls {
+  display         : flex;
+  justify-content : center;
+  align-items     : center;
+  margin-top      : 20px;
+  gap             : 10px
+}
+
+select, button {
+  padding   : 5px;
+  font-size : 14px;
+}
+
+.board-container {
+  display          : grid;
+  box-shadow       : 0 0 5px 5px #00000033;
+  background-color : #fff;
+}
+
+.pixel {
+  background-color : #fff;
+  cursor           : pointer;
+}
+
+.pixel:hover {
+  background-color : #777;
+}
+
+/* GALLERY PAGE */
+.pixel-image {
+  width           : calc(64 * 3px);
+  height          : calc(64 * 3px);
+  image-rendering : crisp-edges; 
+  box-shadow      : 0 0 5px 5px #00000033;
+  display         : flex;
+}
+
+.gallery-grid {
+  margin                : 0 auto;
+  padding               : 20px;
+  max-width             : 1000px;
+  display               : grid;
+  grid-template-columns : repeat(auto-fit, calc(64 * 3px));
+  justify-content       : center;
+  gap                   : 1rem;
+}

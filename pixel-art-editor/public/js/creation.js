@@ -64,7 +64,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let binaryImage = [];
     
     boardContainer.childNodes.forEach((pixel) => {
-      if (pixel.style.backgroundColor !== '') {
+      console.log(pixel.style.backgroundColor)
+      if (pixel.style.backgroundColor === 'rgb(0, 0, 0)') {
         binaryImage.push(1);
       } else {
         binaryImage.push(0);
@@ -83,6 +84,10 @@ document.addEventListener('DOMContentLoaded', () => {
         response.json().then(data => {
           const imageResult = document.getElementById('upload-image');
           imageResult.src = "../" + data.imagePath;
+          imageResult.classList.add('pixel-image')
+          // imageResult.style.boxShadow = '0 0 5px 5px #00000033';
+          // imageResult.style.imageRendering = 'pixelated';
+          // imageResult.style.width = 64*3 + 'px';
         });
       } else {
         console.error('Error generating PNG image');

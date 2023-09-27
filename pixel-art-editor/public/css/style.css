@@ -97,7 +97,7 @@ select, button {
 .pixel-image {
   width           : calc(64 * 3px);
   height          : calc(64 * 3px);
-  image-rendering : crisp-edges; 
+  image-rendering : pixelated; 
   box-shadow      : 0 0 5px 5px #00000033;
   display         : flex;
 }

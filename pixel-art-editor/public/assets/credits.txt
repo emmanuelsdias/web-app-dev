@@ -1,2 +1,5 @@
 Font downloaded from https://www.dafont.com/:
 - 04b_19.tff: https://www.dafont.com/04b-19.font
+
+Examples (from /uploads/example-*.png) copied from chuckchee's 1 bit characters:
+- https://www.vectorstock.com/royalty-free-vectors/1-bit-character-vectors-by_chuckchee

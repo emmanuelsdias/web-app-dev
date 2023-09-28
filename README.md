@@ -5,7 +5,7 @@ This repository contains a collection of projects developed for the course CES-2
 + [High School Webpage](https://emmanuelsdias.github.io/web-app-dev/high-school-webpage/)
 + [Plane and Missile](https://emmanuelsdias.github.io/web-app-dev/plane-and-missile/)
 + [DOM Tree](https://emmanuelsdias.github.io/web-app-dev/dom-tree/)
-+ [Pixel Art Editor](https://emmanuelsdias.github.io/web-app-dev/pixel-art-editor/)
++ [Pixel Art Editor](https://pixel-art-editor.azurewebsites.net/creation)
 
 ## High School Webpage <img src="./high-school-webpage/assets/distintivo-cmpa.svg" alt="Icon" height="24"/>
 

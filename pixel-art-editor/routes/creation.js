@@ -5,20 +5,31 @@ const path = require('path');
 const fs = require('fs');
 const PNG = require('pngjs').PNG;
 
+const MAX_FILES = 20;
+const NUM_EXAMPLES = 4;
+
 // Route for displaying the creation page
 router.get('/', (req, res) => {
   res.render('creation');
 });
 
-router.post('/generate-image', (req, res) => {
-  const list = req.body.binaryImage;
+// Route for uploading the drawings
+router.post('/upload', (req, res) => {
+  const terms = req.body.terms;
+  const list = req.body.image;
+
+  // Check if the user agreed to the terms and conditions
+  if (terms !== 'Yes') {
+    return res.status(499).send('You must agree to the terms and conditions!');
+  }
 
   // Calculate the width of the image based on the length of the list
   const size = Math.sqrt(list.length);
   if (size !== 16 && size !== 32 && size !== 64) {
-    return res.status(400).send('Invalid image size');
+    return res.status(400).send('Invalid image size!');
   }
 
+  // Create a PNG image with the specified size
   let png = new PNG({ 
     width: size,
     height: size,
@@ -44,14 +55,24 @@ router.post('/generate-image', (req, res) => {
     idx += 1;
   });
 
-  // Save the PNG image to a file (or you can use a buffer if you don't need to save it)
-  const imagePath = 'uploads/generated.png';
+  // Count the number of existing files in uploads directory
+  const directory = 'uploads/';
+  const files = fs.readdirSync(directory);
+  let numFiles = files.length - NUM_EXAMPLES;
+
+  // If max files reached, remove the oldest file, sorry!
+  if (numFiles >= MAX_FILES) {
+    const oldestFile = files[4];
+    fs.unlinkSync(path.join(directory, oldestFile));
+  }
+
+  // Save the PNG image to a file
+  const imagePath = 'uploads/generated-' + Date.now() + '.png';
   const imageStream = fs.createWriteStream(imagePath);
   png.pack().pipe(imageStream);
 
-  // Send a JSON response with the status and image path
+  // Respond with status and image path
   res.json({ status: 'OK', imagePath });
 });
-
 
 module.exports = router;

@@ -54,8 +54,7 @@ a,a:link,a:visited,a:hover,a:focus,a:active{
  color           : inherit;
 }
 
-
-/* CREATION */
+/* CREATION PAGE */
 .container {
   margin     : 0 auto;
   padding    : 20px;
@@ -93,6 +92,26 @@ select, button {
   background-color : #777;
 }
 
+.upload-container div {
+  display        : flex;
+  flex-direction : column;
+}
+
+.upload-container div div {
+  display : flex;
+  gap     : 10px;
+  margin  : 10px auto;
+}
+
+#terms {
+  text-align: center;
+}
+
+#upload-image {
+  margin : 10px auto;
+  font-size: small;
+}
+
 /* GALLERY PAGE */
 .pixel-image {
   width           : calc(64 * 3px);
@@ -110,4 +129,15 @@ select, button {
   grid-template-columns : repeat(auto-fit, calc(64 * 3px));
   justify-content       : center;
   gap                   : 1rem;
+}
+
+@media (max-width: 768px) {
+  .pixel-image {
+    width  : calc(64 * 2px);
+    height : calc(64 * 2px);
+  }
+
+  .gallery-grid {
+    grid-template-columns : repeat(auto-fit, calc(64 * 2px));
+  }
 }

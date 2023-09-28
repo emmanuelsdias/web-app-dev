@@ -1,22 +1,29 @@
 document.addEventListener('DOMContentLoaded', () => {
-  let selectedSize = 16;
-
-  const boardSizeSelect = document.getElementById('board-size');
   const boardContainer = document.querySelector('.board-container');
+  const boardSizeSelector = document.getElementById('board-size');
   const clearBoardButton = document.getElementById('clear-board');
   const uploadButton = document.getElementById('upload-button');
+  
+  const termsMessage = document.getElementById('terms-label');
+  const termsInput = document.getElementById('terms');
+  
+  const imageResult = document.getElementById('upload-image');
+  
+  let selectedSize = parseInt(boardSizeSelector.value);
 
-  // Função para criar o grid com base no tamanho selecionado
+  // Resize the board based on the selected size
   function resizeBoard(size) {
     const pixelSize = (boardContainer.offsetWidth - 2) / selectedSize;
     boardContainer.style.gridTemplateColumns = `repeat(${size}, ${pixelSize}px)`;
     boardContainer.style.gridTemplateRows = `repeat(${size}, ${pixelSize}px)`;
   }
 
-  window.addEventListener('resize', () => {
-    resizeBoard(selectedSize);
-  });
+  // Paint the pixel with the specified color
+  function paintPixel(cell, color) {
+    cell.style.backgroundColor = color;
+  }
 
+  // Create the board with the specified size
   function createBoard(size) {
     boardContainer.innerHTML = '';
 
@@ -34,64 +41,72 @@ document.addEventListener('DOMContentLoaded', () => {
       });
       boardContainer.appendChild(pixel);
     }
-
     resizeBoard(size);
   }
 
-  function paintPixel(cell, color) {
-    cell.style.backgroundColor = color;
-  }
-
-  // Inicializa o grid com o tamanho padrão (16x16)
+  // Initialize the board with the default size
   createBoard(selectedSize);
 
+  // On window resize, resize the board
+  window.addEventListener('resize', () => {
+    resizeBoard(selectedSize);
+  }, false);
+
   // Button event to change board size
-  boardSizeSelect.addEventListener('change', function () {
-    selectedSize = parseInt(boardSizeSelect.value);
+  boardSizeSelector.addEventListener('change', function () {
+    selectedSize = parseInt(boardSizeSelector.value);
     createBoard(selectedSize);
-  });
+  }, false);
 
   // Button event to clear board
   clearBoardButton.addEventListener('click', function () {
     const pixels = document.querySelectorAll('.pixel');
     pixels.forEach(pixel => {
-      pixel.style.backgroundColor = '#fff';
+      paintPixel(pixel, '#fff');
     });
-  });
+  }, false);
 
   // Button event to upload image
   uploadButton.addEventListener('click', function () {
+
+    // Compose the binary image according to board pixels
     let binaryImage = [];
-    
     boardContainer.childNodes.forEach((pixel) => {
-      console.log(pixel.style.backgroundColor)
       if (pixel.style.backgroundColor === 'rgb(0, 0, 0)') {
         binaryImage.push(1);
       } else {
         binaryImage.push(0);
       }
     })
+
     // Send the image to the server using an AJAX request
-    fetch('/creation/generate-image', {
+    fetch('/creation/upload', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ binaryImage }),
+      body: JSON.stringify({
+        terms: termsInput.value,
+        image: binaryImage
+      }),
     }).then(response => {
+      // Parse the JSON response to access the image's path
       if (response.ok) {
-        // Parse the JSON response to access the imagePath
         response.json().then(data => {
-          const imageResult = document.getElementById('upload-image');
           imageResult.src = "../" + data.imagePath;
-          imageResult.classList.add('pixel-image')
-          // imageResult.style.boxShadow = '0 0 5px 5px #00000033';
-          // imageResult.style.imageRendering = 'pixelated';
-          // imageResult.style.width = 64*3 + 'px';
+          termsInput.value = "";
         });
+        // If user didn't accept the terms, highlight terms message
+      } else if (response.status == 499) {
+        console.error('Did not accept the terms!');
+        if (termsMessage.style.color !== "red") {
+          termsMessage.style.color = "red";
+        } else {
+          termsMessage.style.fontWeight = "bold";
+        }
       } else {
-        console.error('Error generating PNG image');
+        console.error('Error creating the image!');
       }
-    });
-  });
+    })
+  }, false);
 });

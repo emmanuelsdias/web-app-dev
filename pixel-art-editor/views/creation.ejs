@@ -34,10 +34,16 @@
       <button id="clear-board">Clear</button>
     </div>
     <div class="upload-container">
-      <h2>Upload to the gallery</h2>
-      <p>Each user may upload up to 1 unique image.</p>
-      <button id="upload-button">Upload</button>
-      <img id="upload-image" src="" alt="Your uploaded will be previewed here or in the gallery tab.">
+      <h3>Upload to the gallery</h3>
+      <label id="terms-label" for="terms">I agree to not upload to the gallery any drawings containing inappropriate content (type 'Yes'):</label>
+      <div>
+        <div>
+          <input type="text" id="terms" name="terms" required>
+          <button id="upload-button" type="submit">Upload</button>
+        </div>
+        <img id="upload-image" class="pixel-image" src="data:,"
+          alt="Your uploaded picture will be previewed here and sent to the gallery tab.">
+      </div>
     </div>
   </div>
   <script src="/public/js/creation.js" type="module"></script>

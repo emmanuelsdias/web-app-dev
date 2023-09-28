@@ -50,3 +50,13 @@ Throughout the project, I gained a solid understanding of fundamental jQuery con
 However, I recognize that the handling of click events could have been more organized and efficient. Additionally, the functions responsible for submitting input dialogs would benefit from better communication with other functions. A more streamlined approach, involving the passing of parameters rather than multiple document searches for data retrieval, would enhance code clarity and maintainability.
 
 ## Pixel Art Editor
+
+This project involved the development of a server application using Node.js and Express, complemented by AJAX requests, GET and POST form data handling, and file uploading capabilities. Expanding upon the initial concept, the project evolved into a web application which allowed users to create pixel art and subsequently upload it to a dedicated gallery. The gallery, in turn, showcases all the artwork uploaded to date. You can access the Pixel Art Editor [here](https://pixel-art-editor.azurewebsites.net/gallery). 
+
+### Development process
+
+The development process presented some challenges, especially since I had limited experience with backend programming. Initially, I grappled with determining the optimal project structure and ended up relying on the default Express structure provided during project initialization. Deploying the application to the Azure cloud was relatively straightforward. The most intricate aspect was deciphering the backend code and its interactions within the application. While the project appears to function correctly, I think that I may not have adhered to best practices throughout.
+
+### Lessons learned
+
+Over the course of this project, I got a bit more used to backend programming and routing within a web server application. I also learned to deploy a Node.js application to the cloud. Looking ahead, I intend to enhance the project's structure to better fit it to good practices and explore the possibility of hosting the frontend and backend separately. This approach would enable me to host its frontend on Github Pages, similar to the previous projects.

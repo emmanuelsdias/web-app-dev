@@ -6,6 +6,7 @@ This repository contains a collection of projects developed for the course CES-2
 + [Plane and Missile](https://emmanuelsdias.github.io/web-app-dev/plane-and-missile/)
 + [DOM Tree](https://emmanuelsdias.github.io/web-app-dev/dom-tree/)
 + [Pixel Art Editor](https://pixel-art-editor.azurewebsites.net/creation)
++ [ABCity](https://a-b-city.azurewebsites.net/) 
 
 ## High School Webpage <img src="./high-school-webpage/assets/distintivo-cmpa.svg" alt="Icon" height="24"/>
 
@@ -60,3 +61,11 @@ The development process presented some challenges, especially since I had limite
 ### Lessons learned
 
 Over the course of this project, I got a bit more used to backend programming and routing within a web server application. I also learned to deploy a Node.js application to the cloud. Looking ahead, I intend to enhance the project's structure to better fit it to good practices and explore the possibility of hosting the frontend and backend separately. This approach would enable me to host its frontend on Github Pages, similar to the previous projects.
+
+## ABCity
+
+This project displays a list of cities ranging from A to Z and, when clicking one of them, additional information expands. You can [check it here](https://a-b-city.azurewebsites.net/). Note that the website may take a while until it's working, since the free plan from Azure sleeps after being idle for too long. For that reason, it takes some seconds until the front is running plus the wait time of the back.
+
+### Development process
+
+### Lessons learned

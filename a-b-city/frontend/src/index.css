@@ -1,0 +1,44 @@
+/* CITIES LIST */
+ul {
+  list-style : none;
+  max-width  : 400px;
+  margin     : 0 auto;
+  padding    : 20px;
+}
+
+li {
+  margin     : 5px;
+  padding    : 10px;
+  border     : 1px solid #DDD;
+  cursor     : pointer;
+  transition : background-color 0.3s ease;
+}
+
+li:hover:not(:has(*:hover)) { 
+  background-color : #F0F0F0;
+}
+
+/* CITY INFO */
+li > div {
+  background-color : #F0F0F0;
+  margin-top       : 5px;
+  padding          : 10px;
+  border           : 1px solid #CCC;
+}
+
+img {
+  max-width: 100%;
+}
+
+/* BUTTON */
+button {
+  background-color : #333;
+  color            : #FFF;
+  border           : none;
+  padding          : 5px 10px;
+  cursor           : pointer;
+}
+
+button:hover {
+  background-color : #555;
+}

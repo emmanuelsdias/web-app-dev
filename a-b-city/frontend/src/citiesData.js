@@ -1,0 +1,30 @@
+const cities = [
+  "Amsterdam",
+  "Berlin",
+  "Cairo",
+  "Dublin",
+  "Edinburgh",
+  "Fort Lauderdale",
+  "Geneva",
+  "Havana",
+  "Indianapolis",
+  "Jerusalem",
+  "Kuala Lumpur",
+  "London",
+  "Madrid",
+  "New York City",
+  "Ottawa",
+  "Paris",
+  "Quebec City",
+  "Rome",
+  "San Francisco",
+  "Tokyo",
+  "Ulaanbaatar",
+  "Venice",
+  "Washington D.C.",
+  "Xi'an",
+  "Yerevan",
+  "Zurich"
+];
+
+export default cities;

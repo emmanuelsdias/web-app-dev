@@ -1,0 +1,133 @@
+{
+    "Amsterdam": {
+      "country": "Netherlands",
+      "description": "Amsterdam is known for its picturesque canals and historic houses.",
+      "imagePath": "https://t4logistica.com.br/site/wp-content/uploads/2019/04/banner-rio.jpg"
+    },
+    "Berlin": {
+      "country": "Germany",
+      "description": "Berlin is famous for its rich history and vibrant arts scene.",
+      "imagePath": "https://t4logistica.com.br/site/wp-content/uploads/2019/04/banner-rio.jpg"
+    },
+    "Cairo": {
+      "country": "Egypt",
+      "description": "Cairo is home to the iconic pyramids and Sphinx.",
+      "imagePath": "https://t4logistica.com.br/site/wp-content/uploads/2019/04/banner-rio.jpg"
+    },
+    "Dublin": {
+      "country": "Ireland",
+      "description": "Dublin is renowned for its friendly atmosphere and historic pubs.",
+      "imagePath": "https://t4logistica.com.br/site/wp-content/uploads/2019/04/banner-rio.jpg"
+    },
+    "Edinburgh": {
+      "country": "Scotland",
+      "description": "Edinburgh is known for its stunning castle and annual festivals.",
+      "imagePath": "https://t4logistica.com.br/site/wp-content/uploads/2019/04/banner-rio.jpg"
+    },
+    "Fort Lauderdale": {
+      "country": "United States",
+      "description": "Fort Lauderdale is famous for its beautiful beaches and boating canals.",
+      "imagePath": "https://t4logistica.com.br/site/wp-content/uploads/2019/04/banner-rio.jpg"
+    },
+    "Geneva": {
+      "country": "Switzerland",
+      "description": "Geneva is known for its international organizations and beautiful lake.",
+      "imagePath": "https://t4logistica.com.br/site/wp-content/uploads/2019/04/banner-rio.jpg"
+    },
+    "Havana": {
+      "country": "Cuba",
+      "description": "Havana is famous for its vintage cars and vibrant culture.",
+      "imagePath": "https://t4logistica.com.br/site/wp-content/uploads/2019/04/banner-rio.jpg"
+    },
+    "Indianapolis": {
+      "country": "United States",
+      "description": "Indianapolis is known for its motorsports heritage and museums.",
+      "imagePath": "https://t4logistica.com.br/site/wp-content/uploads/2019/04/banner-rio.jpg"
+    },
+    "Jerusalem": {
+      "country": "Israel",
+      "description": "Jerusalem is a city of great religious significance for Judaism, Christianity, and Islam.",
+      "imagePath": "https://t4logistica.com.br/site/wp-content/uploads/2019/04/banner-rio.jpg"
+    },
+    "Kuala Lumpur": {
+      "country": "Malaysia",
+      "description": "Kuala Lumpur is known for its modern skyline and diverse cuisine.",
+      "imagePath": "https://t4logistica.com.br/site/wp-content/uploads/2019/04/banner-rio.jpg"
+    },
+    "London": {
+      "country": "United Kingdom",
+      "description": "London is a global financial hub and home to many iconic landmarks.",
+      "imagePath": "https://t4logistica.com.br/site/wp-content/uploads/2019/04/banner-rio.jpg"
+    },
+    "Madrid": {
+      "country": "Spain",
+      "description": "Madrid is known for its lively street life and world-class art museums.",
+      "imagePath": "https://t4logistica.com.br/site/wp-content/uploads/2019/04/banner-rio.jpg"
+    },
+    "New York City": {
+      "country": "United States",
+      "description": "New York City is the city that never sleeps, famous for its skyscrapers and cultural diversity.",
+      "imagePath": "https://t4logistica.com.br/site/wp-content/uploads/2019/04/banner-rio.jpg"
+    },
+    "Ottawa": {
+      "country": "Canada",
+      "description": "Ottawa is the capital of Canada and known for its historic landmarks.",
+      "imagePath": "https://t4logistica.com.br/site/wp-content/uploads/2019/04/banner-rio.jpg"
+    },
+    "Paris": {
+      "country": "France",
+      "description": "Paris is often called the 'City of Love' and is famous for its art, fashion, and cuisine.",
+      "imagePath": "https://t4logistica.com.br/site/wp-content/uploads/2019/04/banner-rio.jpg"
+    },
+    "Quebec City": {
+      "country": "Canada",
+      "description": "Quebec City is known for its charming old town and French heritage.",
+      "imagePath": "https://t4logistica.com.br/site/wp-content/uploads/2019/04/banner-rio.jpg"
+    },
+    "Rome": {
+      "country": "Italy",
+      "description": "Rome is famous for its ancient history, including the Colosseum and Roman Forum.",
+      "imagePath": "https://t4logistica.com.br/site/wp-content/uploads/2019/04/banner-rio.jpg"
+    },
+    "San Francisco": {
+      "country": "United States",
+      "description": "San Francisco is known for the Golden Gate Bridge and tech innovation.",
+      "imagePath": "https://t4logistica.com.br/site/wp-content/uploads/2019/04/banner-rio.jpg"
+    },
+    "Tokyo": {
+      "country": "Japan",
+      "description": "Tokyo is a bustling metropolis known for its technology and traditional culture.",
+      "imagePath": "https://t4logistica.com.br/site/wp-content/uploads/2019/04/banner-rio.jpg"
+    },
+    "Ulaanbaatar": {
+      "country": "Mongolia",
+      "description": "Ulaanbaatar is the capital of Mongolia and known for its nomadic culture.",
+      "imagePath": "https://t4logistica.com.br/site/wp-content/uploads/2019/04/banner-rio.jpg"
+    },
+    "Venice": {
+      "country": "Italy",
+      "description": "Venice is famous for its canals and historic architecture.",
+      "imagePath": "https://t4logistica.com.br/site/wp-content/uploads/2019/04/banner-rio.jpg"
+    },
+    "Washington D.C.": {
+      "country": "United States",
+      "description": "Washington D.C. is the capital of the United States and home to many national monuments and museums.",
+      "imagePath": "https://t4logistica.com.br/site/wp-content/uploads/2019/04/banner-rio.jpg"
+    },
+    "Xi'an": {
+      "country": "China",
+      "description": "Xi'an is known for the Terracotta Army and its ancient history as a former capital of China.",
+      "imagePath": "https://t4logistica.com.br/site/wp-content/uploads/2019/04/banner-rio.jpg"
+    },
+    "Yerevan": {
+      "country": "Armenia",
+      "description": "Yerevan is the capital of Armenia and known for its rich history and architecture.",
+      "imagePath": "https://t4logistica.com.br/site/wp-content/uploads/2019/04/banner-rio.jpg"
+    },
+    "Zurich": {
+      "country": "Switzerland",
+      "description": "Zurich is a global financial center and known for its quality of life and beautiful lake.",
+      "imagePath": "https://t4logistica.com.br/site/wp-content/uploads/2019/04/banner-rio.jpg"
+    }
+  }
+  

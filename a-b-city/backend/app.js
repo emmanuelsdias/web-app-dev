@@ -17,6 +17,4 @@ app.get('/city/:name', (req, res) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(`Server running @ http://localhost:${port}`);
-});
+module.exports = app;

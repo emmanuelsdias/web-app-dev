@@ -7,6 +7,9 @@ This repository contains a collection of projects developed for the course CES-2
 + [DOM Tree](https://emmanuelsdias.github.io/web-app-dev/dom-tree/)
 + [Pixel Art Editor](https://pixel-art-editor.azurewebsites.net/creation)
 + [ABCity](https://a-b-city.azurewebsites.net/) 
++ Calculator (not deployed)
+
+Note that the Pixel Art Editor and ABCity projects are hosted on Azure, while the Calculator project wasn't really deployed. Later, when I have more time, they will be reviewed, refined and properly deployed. However, for now, you may have to clone their directories and run them locally.
 
 ## High School Webpage <img src="./high-school-webpage/assets/distintivo-cmpa.svg" alt="Icon" height="24"/>
 
@@ -66,6 +69,6 @@ Over the course of this project, I got a bit more used to backend programming an
 
 This project displays a list of cities ranging from A to Z and, when clicking one of them, additional information expands. You can [check it here](https://a-b-city.azurewebsites.net/). Note that the website may take a while until it's working, since the free plan from Azure sleeps after being idle for too long. For that reason, it takes some seconds until the front is running plus the wait time of the back.
 
-### Development process
+## Calculator
 
-### Lessons learned
+For now, this project was rushed. Later will be reviewed, refined, deployed and documented here.

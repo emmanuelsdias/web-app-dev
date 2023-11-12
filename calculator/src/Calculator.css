@@ -1,0 +1,114 @@
+:root {
+  --GRAY-0  : #474747;
+  --GRAY-1  : #373737;
+  --GRAY-2  : #2C2C2C;
+  --GRAY-3  : #272727;
+  --RED-0   : #b51225;
+  --RED-1   : #A21223;
+  --RED-2   : #6B0C17;
+  --GREEN-0 : #0c831e;
+  --GREEN-1 : #0D761D;
+  --GREEN-2 : #073F0F;
+  --BLACK   : #000000;
+  --WHITE   : #FFFFFF;
+}
+
+body, html {
+  margin  : 0;
+  padding : 0;
+  height  : 100%;
+}
+
+#root {
+  display          : flex;
+  height           : 100%;
+  background-color : var(--GRAY-1);
+  justify-content  : center;
+  align-items      : center;
+}
+
+.calculator {
+  margin           : 30px;
+  padding          : 20px;
+  max-width        : 300px;
+  min-width        : 200px;
+  background-color : var(--GRAY-2);
+  border           : solid 1px var(--BLACK);
+  border-radius    : 10px;
+  box-shadow       : 0 0 20px var(--BLACK);
+}
+
+.number-field {
+  padding          : 10px;
+  margin           : 10px 0;
+  width            : calc(100% - 20px);
+  color            : var(--WHITE);
+  background-color : var(--GRAY-3);
+  font-size        : 20px;
+  border           : 1px solid var(--BLACK);
+  border-radius    : 5px;
+}
+
+.number-field:focus {
+  outline : none;
+}
+
+.display-operator {
+  color          : var(--WHITE);
+  border         : solid 1px var(--BLACK);
+  width          : 10%;
+  margin         : auto;
+  padding        : 10px;
+  font-weight    : 600;
+  font-size      : 24px;
+  text-align     : center;
+  vertical-align : middle;
+  line-height    : 20px;
+  height         : 20px;
+}
+
+.button-grid {
+  display               : grid;
+  grid-template-columns : repeat(4, 1fr);
+  gap                   : 10px;
+  margin                : 10px 0;
+}
+
+.button {
+  color         : var(--WHITE);
+  font-size     : 20px;
+  padding       : 10px 0;
+  border        : 1px solid;
+  border-radius : 5px;
+  cursor        : pointer;
+}
+
+.number,
+.operator {
+  border-color     : var(--BLACK);
+  background-color : var(--GRAY-1);
+}
+
+.number:hover,
+.operator:hover {
+  background-color : var(--GRAY-0);
+}
+
+.equal {
+  border-color     : var(--GREEN-2);
+  background-color : var(--GREEN-1);
+  grid-column      : span 4;
+}
+
+.equal:hover {
+  background-color : var(--GREEN-0);
+}
+
+.reset {
+  border-color     : var(--RED-2);
+  background-color : var(--RED-1);
+}
+
+.reset:hover {
+  background-color : var(--RED-0);
+}
